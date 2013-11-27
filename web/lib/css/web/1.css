@@ -1,0 +1,11 @@
+﻿@import url(pages.css);
+@import url(facebox.css);
+@import url(http://fonts.googleapis.com/css?family=Marck+Script|Monsieur+La+Doulaise);
+body{
+    padding-top: 70px;
+}
+.logo {
+    font-family: 'Marck Script', cursive;
+    font-size: 18pt;
+    font-weight: bold;
+}

@@ -1,0 +1,44 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Bally.master.cs" Inherits="lib_master_Bally" %>
+<%@ Import Namespace="docsoft" %>
+<%@ Register src="~/lib/ui/Bally/HeThong/Banner.ascx" tagname="Banner" tagprefix="uc1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/lib/css/web/1.css" rel="stylesheet" type="text/css" />
+    <link href="/lib/css/web/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+
+    <script>
+        var src = '<%=Request.Url.PathAndQuery %>';
+        var logged = <%=Security.IsAuthenticated().ToString().ToLower()%>;
+        FB.init({
+            appId: '1391830844393294',
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
+
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">    
+    <div id="fb-root">
+        <uc1:Banner ID="Banner1" runat="server" />
+        </div>  
+        <div class="container">
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>    
+        </div>
+    </form>
+    <script>
+        var domain = '<%=domain %>';
+    </script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
+
