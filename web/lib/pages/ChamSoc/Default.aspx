@@ -1,9 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/lib/master/Bally.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="lib_pages_TiemNang_Default" %>
-
-<%@ Register src="~/lib/ui/Bally/KhachHang/DanhSachAll.ascx" tagname="DanhSachAll" tagprefix="uc1" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/lib/master/Bally.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="lib_pages_ChamSoc_Default" %>
 <%@ Register src="~/lib/ui/Bally/HeThong/DanhMucListByLdmMa.ascx" tagname="DanhMucListByLdmMa" tagprefix="uc2" %>
-
+<%@ Register src="../../ui/Bally/ChamSoc/DanhSach.ascx" tagname="DanhSach" tagprefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -13,28 +10,23 @@
             <div class="row">
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <a href="/lib/pages/TiemNang/Add.aspx" class="btn btn-primary">Thêm</a>   
-                        <a href="/lib/pages/TiemNang/Default.aspx" class="btn btn-success">
-                         <i class="glyphicon glyphicon-refresh"></i>
-                        </a>                                     
+                        <a href="/lib/pages/ChamSoc/Add.aspx" class="btn btn-primary">Thêm</a>
+                        <a href="/lib/pages/ChamSoc/Default.aspx" class="btn btn-success">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <uc2:DanhMucListByLdmMa ControlName="NguonGoc_Id" ControlId="NguonGoc_Id" ID="NguonGoc" runat="server" />                
+                        <uc2:DanhMucListByLdmMa ControlName="TT_ID" ControlId="TT_ID" ID="TT_ID" runat="server" />                
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <uc2:DanhMucListByLdmMa ControlName="KhuVuc_Id" ControlId="KhuVuc_Id" ID="KhuVuc" runat="server" />                    
+                        <uc2:DanhMucListByLdmMa ControlName="LOAI_ID" ControlId="LOAI_ID" ID="LOAI_ID" runat="server" />                    
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <uc2:DanhMucListByLdmMa ID="LinhVuc" ControlName="LinhVuc_Id" ControlId="LinhVuc_Id" runat="server" />
-                    </div>
-                </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <div class="pull-right">
                         <div class="input-group">
                           <input name="q" type="text" value="<%=Request["q"] %>" class="form-control">
@@ -46,7 +38,7 @@
                                 <li><a href="javascript:;" class="searchBtn">
                                       <i class="glyphicon glyphicon-search"></i> Tìm
                                   </a></li>
-                              <li><a href="/lib/pages/TiemNang/Default.aspx">
+                              <li><a href="/lib/pages/KhachHang/Default.aspx">
                                       <i class="glyphicon glyphicon-remove"></i> Bỏ lọc
                                   </a></li>
                             </ul>
@@ -58,7 +50,7 @@
             </div>
         </div>               
     </div>
-    <uc1:DanhSachAll Target="TiemNang" ID="DanhSachAll1" runat="server" />
+    <uc1:DanhSach ID="DanhSach1" runat="server" />
     <ul class="PagingList">
         <%=paging %>
     </ul>

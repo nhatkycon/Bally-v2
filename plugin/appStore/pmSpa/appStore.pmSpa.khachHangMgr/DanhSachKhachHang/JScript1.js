@@ -151,7 +151,7 @@
                                     var NguoiGioiThieu = $('.NguoiGioiThieu', newDlg);
                                     var LinhVuc_ID = $('.LinhVuc_ID', newDlg);
                                     var TuVanVien = $('.TuVanVien', newDlg);
-                                    
+
                                     var spbMsg = $('.admMsg', newDlg);
 
                                     var imgAnh = $('.adm-upload-preview-img', newDlg);
@@ -170,7 +170,7 @@
                                     if (NgaySinh.getFullYear() != 100) {
                                         NgaySinh.val(value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear());
                                     }
-                                    
+
                                     if (dt.GioiTinh) {
                                         GioiTinh.attr('checked', 'checked');
                                     }
@@ -184,12 +184,12 @@
                                     Ym.val(dt.Ym);
                                     NguonGoc_ID.val(dt.NguonGoc_Ten);
                                     NguonGoc_ID.attr('_value', dt.NguonGoc_ID);
-                                    
+
                                     LinhVuc_ID.val(dt.LinhVuc_Ten);
                                     LinhVuc_ID.attr('_value', dt.LinhVuc_ID);
                                     TuVanVien.val(dt.TuVanVien_Ten);
                                     TuVanVien.attr('_value', dt.TuVanVien);
-                                    
+
                                     DiaChi.val(dt.DiaChi);
                                     KhuVuc_ID.val(dt.KhuVuc_Ten);
                                     KhuVuc_ID.attr('_value', dt.KhuVuc_ID);
@@ -211,7 +211,7 @@
             }
         }
     },
-    add: function (fn) {
+    add: function (fn, fn1) {
         DanhSachKhachHangFn.loadHtml(function () {
             var newDlg = $('#DanhSachKhachHangMdl-dlgNew');
             $(newDlg).dialog({
@@ -228,7 +228,9 @@
                             DanhSachKhachHangFn.draff(function () {
 
                             });
-                        }, '#DanhSachKhachHangMdl-List');
+                        }, '#DanhSachKhachHangMdl-List', function (dt1, _Ten, _Mobile, _DiaChi) {
+                            fn1(dt1, _Ten, _Mobile, _DiaChi);
+                        });
                     },
                     'Lưu và đóng': function () {
                         DanhSachKhachHangFn.save(false, function (_ID, _Ten) {
@@ -236,7 +238,9 @@
                                 fn(_ID, _Ten);
                             }
                             $(newDlg).dialog('close');
-                        }, '#DanhSachKhachHangMdl-List');
+                        }, '#DanhSachKhachHangMdl-List', function (dt1, _Ten, _Mobile, _DiaChi) {
+                            fn1(dt1, _Ten, _Mobile, _DiaChi);
+                        });
                     },
                     'Đóng': function () {
                         $(newDlg).dialog('close');
@@ -249,7 +253,7 @@
                     adm.styleButton();
                     DanhSachKhachHangFn.clearform();
                     DanhSachKhachHangFn.popfn();
-                    DanhSachKhachHangFn.draff(function() {
+                    DanhSachKhachHangFn.draff(function () {
 
                     });
                 }
@@ -283,7 +287,7 @@
             }
         }
     },
-    save: function (validate, fn, grid) {
+    save: function (validate, fn, grid, fn1) {
         if (typeof (grid) == 'undefined') grid == '#DanhSachKhachHangMdl-List';
         var newDlg = $('#DanhSachKhachHangMdl-dlgNew');
         var ID = $('.ID', newDlg);
@@ -305,7 +309,7 @@
         var NguoiGioiThieu = $('.NguoiGioiThieu', newDlg);
         var LinhVuc_ID = $('.LinhVuc_ID', newDlg);
         var TuVanVien = $('.TuVanVien', newDlg);
-        
+
         //region bien
         var _Anh = $(Anh).attr('ref');
         var _ID = ID.val();
@@ -325,15 +329,15 @@
         var _NgungTheoDoi = NgungTheoDoi.is(':checked');
         var _TuVanVien = TuVanVien.attr('_value');
         var _LinhVuc_ID = LinhVuc_ID.attr('_value');
-        
+
         var _ID = ID.val();
         //endregion
 
         var err = '';
-        if (_NguonGoc_ID == '') { err += 'Chọn nguồn gốc<br/>'; };
-        if (_KhuVuc_ID == '') { err += 'Chọn khu vực khách hàng<br/>'; };
-        if (_Ten == '') { err += 'Nhập tên<br/>'; };
-        if (_Ma == '') { err += 'Nhập mã<br/>'; };
+        //if (_NguonGoc_ID == '') { err += 'Chọn nguồn gốc<br/>'; };
+        //if (_KhuVuc_ID == '') { err += 'Chọn khu vực khách hàng<br/>'; };
+        //if (_Ten == '') { err += 'Nhập tên<br/>'; };
+        //if (_Ma == '') { err += 'Nhập mã<br/>'; };
 
         if (err != '') { spbMsg.html(err); return false; }
         if (validate) { if (typeof (fn) == 'function') { fn(); } return false; }
@@ -364,8 +368,9 @@
             },
             success: function (dt) {
                 adm.loading(null);
-                if (typeof(fn) == 'function') {
+                if (typeof (fn) == 'function') {
                     fn(dt, _Ten);
+                    fn1(dt, _Ten, _Mobile, _DiaChi);
                 }
                 $(grid).trigger('reloadGrid');
             }
@@ -431,7 +436,7 @@
                             if (ss[j] != '') {
                                 var treedata = $("#DanhSachKhachHangMdl-List").jqGrid('getRowData', ss[j]);
                                 ll += '<span class=\"adm-token-item\" _value=\"' + treedata.ID + '\">' + treedata.Ten + '<a href=\"javascript:;\">x</a></span>';
-                            }                            
+                            }
                         }
                         $(EmailToDiv).prepend(ll);
                         $(EmailToDiv).find('a').click(function () {
@@ -501,7 +506,7 @@
         var KhuVuc_ID = $('.KhuVuc_ID', newDlg);
         var LinhVuc_ID = $('.LinhVuc_ID', newDlg);
         var TuVanVien = $('.TuVanVien', newDlg);
-        
+
         var NgungTheoDoi = $('.NgungTheoDoi', newDlg);
         var spbMsg = $('.admMsg', newDlg);
         var imgPreview = $('.adm-upload-preview-img', newDlg);
@@ -602,7 +607,7 @@
     },
     autoCompleteSearch: function (el, fn, fn1) {
         if (typeof (fn1) != "function") {
-            fn1 = function(ul, item) {
+            fn1 = function (ul, item) {
                 return $("<li></li>")
                     .data("item.autocomplete", item)
                     .append("<a href=\"javascript:;\">" + item.label + "</a>")
@@ -623,8 +628,10 @@
                         _cache[term] = data;
                         if (xhr === _lastXhr) {
                             var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-                            response($.map(data, function(item) {
-                                if (matcher.test(item.Ten.toLowerCase()) || matcher.test(adm.normalizeStr(item.Ten.toLowerCase())) || matcher.test(item.Ma.toLowerCase()) || matcher.test(adm.normalizeStr(item.Email.toLowerCase())) || matcher.test(item.Mobile.toLowerCase()) || matcher.test(adm.normalizeStr(item.Phone.toLowerCase()))) {
+                            response($.map(data, function (item) {
+                                if (item.Email == 'null') item.Email = '';
+                                if (item.Phone == 'null') item.Phone = '';
+                                if (matcher.test(item.Ten.toLowerCase()) || matcher.test(adm.normalizeStr(item.Ten.toLowerCase())) || matcher.test(item.Ma.toLowerCase()) || matcher.test(item.Mobile.toLowerCase())) {
                                     return {
                                         label: item.Ten,
                                         value: item.Ten,

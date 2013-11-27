@@ -9,13 +9,13 @@
             <th class="">
                 Tên
             </th>
-            <th class="hidden-xs">
+            <th class="hidden-xs hidden-sm">
                 Face
             </th>
             <th class="">
                 Mobile
             </th>
-            <th class="">
+            <th class="hidden-xs">
                 Ym
             </th>
             <th class="hidden-xs">
@@ -31,7 +31,7 @@
     </thead>
     <asp:Repeater runat="server" ID="rpt">
         <ItemTemplate>
-            <uc2:Item ID="Item2" runat="server" Item='<%# Container.DataItem %>' />
+            <uc2:Item ID="Item2" TargetUrl="<%# Target %>" runat="server" Item='<%# Container.DataItem %>' />
         </ItemTemplate>
     </asp:Repeater>    
 </table>

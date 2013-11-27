@@ -49,6 +49,7 @@
     <Compile Include="Articles.cs" />
     <Compile Include="capgui.cs" />
     <Compile Include="Album.cs" />
+    <Compile Include="ChamSoc.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="TimKiem.cs" />
     <Compile Include="XuatNhapReport.cs" />

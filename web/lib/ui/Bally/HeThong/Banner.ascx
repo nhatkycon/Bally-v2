@@ -2,7 +2,6 @@
 <%@ Import Namespace="docsoft" %>
 <div class="navbar-wrapper">
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -15,7 +14,7 @@
             </a>            
         </div>
         <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thêm<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -65,17 +64,13 @@
                 <ul class="dropdown-menu">
                   <li class="divider"></li>
                     <li>
-                        <a href="javascript:;" class="logoutbtn">
-                              Thoát
-                              <i class="icon icon-signout"></i>
+                        <a href="javascript:;" class="logoutbtn"> Thoát <i class="icon icon-signout"></i>
                           </a>
                     </li>
                 </ul>
               </li>
             <%} %>
-            </ul>
-            
-        </div>
+            </ul>            
         </div>
     </div>
 </div>

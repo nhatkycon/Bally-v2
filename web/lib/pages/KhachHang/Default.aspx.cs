@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using docsoft.entities;
 using linh.core.dal;
 using pmSpa.entities;
@@ -21,7 +16,11 @@ public partial class lib_pages_KhachHang_Default : System.Web.UI.Page
         var linhVucId = Request["LinhVuc_Id"];
         using (var con = DAL.con())
         {
-            var pg = KhachHangDal.pagerAll(string.Format("?q={0}&size={1}&KhuVuc_Id={2}&NguonGoc_Id={3}&", q, size, khuVucId, nguonGocId) + "{1}={0}", false, null, q, Convert.ToInt32(size), khuVucId, nguonGocId);
+            var pg =
+                KhachHangDal.pagerAll(
+                    string.Format("?q={0}&size={1}&KhuVuc_Id={2}&NguonGoc_Id={3}&LinhVuc_Id={4}&", q, size, khuVucId,
+                                  nguonGocId, linhVucId) + "{1}={0}", false, null, q, Convert.ToInt32(size), khuVucId,
+                    nguonGocId, linhVucId, "0");
             DanhSachAll1.List = pg.List;
             paging = pg.Paging;
 

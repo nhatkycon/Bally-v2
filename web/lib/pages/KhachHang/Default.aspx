@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/lib/master/Bally.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="lib_pages_KhachHang_Default" %>
 
-<%@ Register src="../../ui/Bally/KhachHang/DanhSachAll.ascx" tagname="DanhSachAll" tagprefix="uc1" %>
+<%@ Register src="~/lib/ui/Bally/KhachHang/DanhSachAll.ascx" tagname="DanhSachAll" tagprefix="uc1" %>
 
-<%@ Register src="../../ui/Bally/HeThong/DanhMucListByLdmMa.ascx" tagname="DanhMucListByLdmMa" tagprefix="uc2" %>
+<%@ Register src="~/lib/ui/Bally/HeThong/DanhMucListByLdmMa.ascx" tagname="DanhMucListByLdmMa" tagprefix="uc2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -13,8 +13,12 @@
             <div class="row">
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <a href="/lib/pages/KhachHang/Add.aspx" class="btn btn-primary">Thêm</a>                                        
+                        <a href="/lib/pages/KhachHang/Add.aspx" class="btn btn-primary">Thêm</a>      
+                        <a href="/lib/pages/KhachHang/Default.aspx" class="btn btn-success">
+                             <i class="glyphicon glyphicon-refresh"></i>
+                        </a>                                  
                     </div>
+                    
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
@@ -36,11 +40,13 @@
                         <div class="input-group">
                           <input name="q" type="text" value="<%=Request["q"] %>" class="form-control">
                           <div class="input-group-btn">
-                            <a type="button" class="btn btn-default dropdown-toggle searchBtn" data-toggle="dropdown">
-                                <i class="glyphicon glyphicon-search"></i> 
+                            <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:;" class="searchBtn">
+                                      <i class="glyphicon glyphicon-search"></i> Tìm
+                                  </a></li>
                               <li><a href="/lib/pages/KhachHang/Default.aspx">
                                       <i class="glyphicon glyphicon-remove"></i> Bỏ lọc
                                   </a></li>
@@ -53,7 +59,7 @@
             </div>
         </div>               
     </div>
-    <uc1:DanhSachAll ID="DanhSachAll1" runat="server" />
+    <uc1:DanhSachAll Target="KhachHang" ID="DanhSachAll1" runat="server" />
     <ul class="PagingList">
         <%=paging %>
     </ul>
