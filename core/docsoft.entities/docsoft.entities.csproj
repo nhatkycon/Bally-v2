@@ -50,6 +50,7 @@
     <Compile Include="capgui.cs" />
     <Compile Include="Album.cs" />
     <Compile Include="Comment.cs" />
+    <Compile Include="TimKiem.cs" />
     <Compile Include="XuatNhapReport.cs" />
     <Compile Include="ThuChiReport.cs" />
     <Compile Include="KhoHang.cs" />

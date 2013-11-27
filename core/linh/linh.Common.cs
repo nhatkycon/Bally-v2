@@ -34,12 +34,34 @@ namespace linh.common
 
             return sb.ToString();
         }
-
+        public static XmlDocument XmlSerializeToXml(object objectInstance)
+        {
+            var serializer = new XmlSerializer(objectInstance.GetType());
+            var sb = new StringBuilder();
+            var doc = new XmlDocument();
+            using (TextWriter writer = new StringWriter(sb))
+            {
+                serializer.Serialize(writer, objectInstance);
+            }
+            doc.LoadXml(sb.ToString());
+            return doc;
+        }
         public static T XmlDeserializeFromString<T>(string objectData)
         {
             return (T)XmlDeserializeFromString(objectData, typeof(T));
         }
+        public static object XmlDeserializeFromXml(XmlDocument objectXml, Type type)
+        {
+            var serializer = new XmlSerializer(type);
+            object result;
+            var objectData = GetXmlString(objectXml);
+            using (TextReader reader = new StringReader(objectData))
+            {
+                result = serializer.Deserialize(reader);
+            }
 
+            return result;
+        }
         public static object XmlDeserializeFromString(string objectData, Type type)
         {
             var serializer = new XmlSerializer(type);
@@ -775,6 +797,8 @@ namespace linh.common
         private const string defaultKey = "linhnxObanbe";
         public static string EncryptString(string Message, string Passphrase)
         {
+            if(string.IsNullOrEmpty(Message))
+                return string.Empty;
             byte[] Results;
             System.Text.UTF8Encoding UTF8 = new System.Text.UTF8Encoding();
 

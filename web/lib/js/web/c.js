@@ -2,78 +2,6 @@
 $(function () {
     common.setup();
     common.scrollMsg();
-    jQuery(window).scroll(function () {
-        common.scrollMsg();
-    });
-
-    jQuery.each(jQuery('li', '.navi-top'), function (i, _item) {
-        var item = jQuery(_item);
-
-        var flyOut = item.find('div');
-        var aItem = item.find('.navi-top-item');
-        if (jQuery(flyOut).length > 0) {
-            item.mouseenter(function () {
-                aItem.addClass('navi-top-item-focus');
-                var previousItem = item.prev();
-                if ($(previousItem).length > 0) {
-                    previousItem.find('.navi-top-item').addClass('navi-top-item-prev');
-                }
-                common.getEl(item, function (_t, _l, _w, _t1) {
-                    flyOut.show().css({ 'left': (_l) + 'px', 'top': (_t1 - 1) + 'px' });
-                    item.mouseleave(function () {
-                        flyOut.hide();
-                        aItem.removeClass('navi-top-item-focus');
-                        if ($(previousItem).length > 0) {
-                            previousItem.find('.navi-top-item').removeClass('navi-top-item-prev');
-                        }
-                    });
-                });
-            });
-        }
-    });
-    $('.navi-top').find('.navi-top-item:last').addClass('navi-top-item-last');
-    $('.tin-lienQuan-body').find('.tin-item:last').addClass('tin-item-last');
-
-    function homefn() {
-
-        //**//    
-        $('.box-header-label-item').unbind('click').click(function () {
-            var item = $(this);
-            if (item.hasClass('.box-header-label-item-active')) return;
-            item.parent().find('.box-header-label-item-active').removeClass('box-header-label-item-active');
-            item.addClass('box-header-label-item-active');
-            item.parent().next().find('.tin-nhom-box-active').removeClass('tin-nhom-box-active');
-            item.parent().next().find('[_rel=\'' + item.attr('_rel') + '\']').addClass('tin-nhom-box-active');
-        });
-        // Script for Home-tintuc
-        $('.tin-item-DanhMucStyle3Medium').mouseenter(function () {
-            var item = $(this);
-            if (item.hasClass('tin-item-DanhMucStyle3Medium-actived'))
-                return;
-            item.parent().find('.tin-item-DanhMucStyle3Medium-actived').removeClass('tin-item-DanhMucStyle3Medium-actived');
-            item.addClass('tin-item-DanhMucStyle3Medium-actived');
-            item.parent().prev().find('img').attr('src', item.find('img').attr('src'));
-        });
-        $('.tin-item-DanhMucStyle6Tiny, .tin-item-DanhMucStyle6Big').mouseenter(function () {
-            var item = $(this);
-            item.parent().find('.tin-item-DanhMucStyle6Big').addClass('tin-item-DanhMucStyle6Tiny').removeClass('tin-item-DanhMucStyle6Big');
-            item.removeClass('tin-item-DanhMucStyle6Tiny').addClass('tin-item-DanhMucStyle6Big');
-            item.click(function () {
-                document.location.href = item.find('.tin-item-ten').attr('href');
-            });
-        });
-
-
-        $('.tin-item-tinyHead').mouseenter(function () {
-            var item = $(this);
-            var box = item.parent().find('.tin-item-bigHead');
-            box.find('img.tin-item-img').attr('src', item.find('.tin-item-img').attr('_src'));
-            box.find('.tin-item-mota').html(item.find('.tin-item-mota').html());
-            box.find('.tin-item-ten').html(item.find('.tin-item-ten').html());
-        });
-    }
-    homefn();
-
 });
 function FormatDateTimeJson(jsonDate) {
     var value = new Date(jsonDate);
@@ -102,7 +30,23 @@ var common = {
         _Avatar = ten + size + mime;
         return _Avatar;
     },
-    formatTien: function (obj) {
+    imgfinder: function (el, _startupPath, fn) {
+        var item = $(el);
+        item.on('click', function () {
+            CKFinder.popup({ BasePath: '/ckfinder/'
+            , startupPath: _startupPath
+            , selectActionFunction: function (fileUrl, data) {
+                fn(item, fileUrl);
+            }
+            , callback: function (api) { //api.openMsgDialog("", "Almost ready to go!");
+            }
+            , startupFolderExpanded: true
+            , rememberLastFolder: true
+            });
+            return false;
+        });
+    }
+    , formatTien: function (obj) {
         common.regJPlugin(jQuery().formatCurrency, 'lib/js/jquery.formatCurrency-1.4.0.min.js', function () {
             // Format while typing & warn on decimals entered, no cents
             obj.formatCurrency({ colorize: true, negativeFormat: '-%s%n', roundToDecimalPlace: 0, symbol: '' });
@@ -137,7 +81,7 @@ var common = {
 			});
         });
 
-    },    
+    },
     loadHtml: function (dlg, url, fn) {
         if ($(dlg).length < 1) {
             common.loading('Dựng from');
@@ -188,6 +132,7 @@ var common = {
     },
     logout: function () { $.ajax({ url: common._domain + '/lib/aspx/sys/authenticate.aspx?ref=' + Math.random(), data: { 'act': 'LogOut' }, success: function (data) { var h = document.location.hash; var d = document.location.href; if (h.length > 0) { d = d.substr(0, d.indexOf(h)); } document.location.href = d; } }); },
     fbMsg: function (title, msg, _width, _id, fn) {
+        return;
         if (_id == null) { var _id = Math.random().toString().replace('.', ''); }
         if (_id == '') _id = Math.random().toString().replace('.', '');
         if (_width == null) _width = '400';
@@ -201,6 +146,7 @@ var common = {
         if (typeof (fn) == 'function') { fn(b); }
     },
     fbJquery: function (title, node, _width, _id, fn) {
+        return;
         if (_id == null) { var _id = Math.random().toString().replace('.', ''); }
         if (_id == '') _id = Math.random().toString().replace('.', '');
         if (_width == null) _width = '400';
@@ -214,6 +160,7 @@ var common = {
         if (typeof (fn) == 'function') { fn(b); }
     },
     fbAjax: function (title, url, data, _width, _id, fn) {
+        return;
         if (_id == null) { var _id = Math.random().toString().replace('.', ''); }
         if (_id == '') _id = Math.random().toString().replace('.', '');
         if (_width == null) _width = '400';

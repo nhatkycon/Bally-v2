@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using linh.common;
 using linh.controls;
 using linh.core;
 using linh.core.dal;
@@ -47,6 +48,7 @@ namespace pmSpa.entities
         public Guid NguoiGioiThieu { get; set; }
         public String Anh { get; set; }
         public String TuVanVien { get; set; }
+        public Boolean TiemNang { get; set; }
         #endregion
         #region Contructor
         public KhachHang()
@@ -104,7 +106,8 @@ namespace pmSpa.entities
         public static KhachHang Insert(KhachHang item)
         {
             var Item = new KhachHang();
-            var obj = new SqlParameter[32];
+            MaHoaDuLieu(item, true);
+            var obj = new SqlParameter[33];
             obj[0] = new SqlParameter("KH_ID", item.ID);
             obj[1] = new SqlParameter("KH_Ma", item.Ma);
             obj[2] = new SqlParameter("KH_Ten", item.Ten);
@@ -158,6 +161,7 @@ namespace pmSpa.entities
             obj[29] = new SqlParameter("KH_ThoiGianGoiDien", item.ThoiGianGoiDien);
             obj[30] = new SqlParameter("KH_Anh", item.Anh);
             obj[31] = new SqlParameter("KH_TuVanVien", item.TuVanVien);
+            obj[32] = new SqlParameter("KH_TiemNang", item.TiemNang);
 
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblSpaMgr_KhachHang_Insert_InsertNormal_linhnx", obj))
             {
@@ -172,7 +176,8 @@ namespace pmSpa.entities
         public static KhachHang Update(KhachHang item)
         {
             var Item = new KhachHang();
-            var obj = new SqlParameter[32];
+            MaHoaDuLieu(item, true);
+            var obj = new SqlParameter[33];
             obj[0] = new SqlParameter("KH_ID", item.ID);
             obj[1] = new SqlParameter("KH_Ma", item.Ma);
             obj[2] = new SqlParameter("KH_Ten", item.Ten);
@@ -226,6 +231,7 @@ namespace pmSpa.entities
             obj[29] = new SqlParameter("KH_ThoiGianGoiDien", item.ThoiGianGoiDien);
             obj[30] = new SqlParameter("KH_Anh", item.Anh);
             obj[31] = new SqlParameter("KH_TuVanVien", item.TuVanVien);
+            obj[32] = new SqlParameter("KH_TiemNang", item.TiemNang);
 
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblSpaMgr_KhachHang_Update_UpdateNormal_linhnx", obj))
             {
@@ -497,6 +503,11 @@ namespace pmSpa.entities
             {
                 Item.Tuoi = (Int32)(rd["KH_Tuoi"]);
             }
+            if (rd.FieldExists("KH_TiemNang"))
+            {
+                Item.TiemNang = (Boolean)(rd["KH_TiemNang"]);
+            }
+            MaHoaDuLieu(Item, false);
             return Item;
         }
         #endregion
@@ -681,6 +692,26 @@ namespace pmSpa.entities
 
             var pg = new Pager<KhachHang>("sp_tblSpaMgr_KhachHang_Pager_SinhNhat_linhnx", "page", size, 10, rewrite, url, obj);
             return pg;
+        }
+
+        public static void MaHoaDuLieu(KhachHang Item, bool MaHoa)
+        {
+            if(MaHoa)
+            {
+                Item.Ten = maHoa.EncryptString(Item.Ten, Item.ID.ToString());
+                Item.Email = maHoa.EncryptString(Item.Email, Item.ID.ToString());
+                Item.DiaChi = maHoa.EncryptString(Item.DiaChi, Item.ID.ToString());
+                Item.FacebookUid = maHoa.EncryptString(Item.FacebookUid, Item.ID.ToString());
+                Item.Ma = maHoa.EncryptString(Item.Ma, Item.ID.ToString());
+            }
+            else
+            {
+                Item.Ten = maHoa.DecryptString(Item.Ten, Item.ID.ToString());
+                Item.Email = maHoa.DecryptString(Item.Email, Item.ID.ToString());
+                Item.DiaChi = maHoa.DecryptString(Item.DiaChi, Item.ID.ToString());
+                Item.FacebookUid = maHoa.DecryptString(Item.FacebookUid, Item.ID.ToString());
+                Item.Ma = maHoa.DecryptString(Item.Ma, Item.ID.ToString());
+            }
         }
         #endregion
     }

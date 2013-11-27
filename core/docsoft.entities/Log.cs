@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using linh.common;
 using linh.controls;
 using linh.core.dal;
 using linh.core;
@@ -10,6 +11,7 @@ using System.Data.SqlClient;
 using System.Xml;
 namespace docsoft.entities
 {
+
     #region Log
     #region BO
     public class Log : BaseEntity
@@ -21,20 +23,20 @@ namespace docsoft.entities
         public String Username { get; set; }
         public DateTime NgayTao { get; set; }
         public String RequestIp { get; set; }
-        public XmlDocument GiaTriCu { get; set; }
-        public XmlDocument GiaTriMoi { get; set; }
+        public String GiaTriCu { get; set; }
+        public String GiaTriMoi { get; set; }
         public String RawUrl { get; set; }
         public String Info { get; set; }
         public Boolean Checked { get; set; }
-        
+        public Guid PRowId { get; set; }
+        public String PTen { get; set; }
         #endregion
         #region Contructor
         public Log()
         { }
         #endregion
         #region Customs properties
-        public object GiaTriCuObj { get; set; }
-        public object GiaTriMoiObj { get; set; }
+
         #endregion
         public override BaseEntity getFromReader(IDataReader rd)
         {
@@ -53,25 +55,34 @@ namespace docsoft.entities
 
         public static void DeleteById(Int32 LOG_ID)
         {
-            SqlParameter[] obj = new SqlParameter[1];
+            var obj = new SqlParameter[1];
             obj[0] = new SqlParameter("LOG_ID", LOG_ID);
             SqlHelper.ExecuteNonQuery(DAL.con(), CommandType.StoredProcedure, "sp_tblLog_Delete_DeleteById_linhnx", obj);
         }
 
-        public static Log Insert(Log Inserted)
+        public static Log Insert(Log item)
         {
-            Log Item = new Log();
-            SqlParameter[] obj = new SqlParameter[10];
-            obj[0] = new SqlParameter("LOG_LLOG_ID", Inserted.LLOG_ID);
-            obj[1] = new SqlParameter("LOG_Ten", Inserted.Ten);
-            obj[2] = new SqlParameter("LOG_Username", Inserted.Username);
-            obj[3] = new SqlParameter("LOG_NgayTao", Inserted.NgayTao);
-            obj[4] = new SqlParameter("LOG_RequestIp", Inserted.RequestIp);
-            obj[5] = new SqlParameter("LOG_GiaTriCu", Inserted.GiaTriCu);
-            obj[6] = new SqlParameter("LOG_GiaTriMoi", Inserted.GiaTriMoi);
-            obj[7] = new SqlParameter("LOG_RawUrl", Inserted.RawUrl);
-            obj[8] = new SqlParameter("LOG_Info", Inserted.Info);
-            obj[9] = new SqlParameter("LOG_Checked", Inserted.Checked);
+            var Item = new Log();
+            var obj = new SqlParameter[13];
+            obj[1] = new SqlParameter("LOG_LLOG_ID", item.LLOG_ID);
+            obj[2] = new SqlParameter("LOG_Ten", item.Ten);
+            obj[3] = new SqlParameter("LOG_Username", item.Username);
+            if (item.NgayTao > DateTime.MinValue)
+            {
+                obj[4] = new SqlParameter("LOG_NgayTao", item.NgayTao);
+            }
+            else
+            {
+                obj[4] = new SqlParameter("LOG_NgayTao", DBNull.Value);
+            }
+            obj[5] = new SqlParameter("LOG_RequestIp", item.RequestIp);
+            obj[6] = new SqlParameter("LOG_GiaTriCu", item.GiaTriCu);
+            obj[7] = new SqlParameter("LOG_GiaTriMoi", item.GiaTriMoi);
+            obj[8] = new SqlParameter("LOG_RawUrl", item.RawUrl);
+            obj[9] = new SqlParameter("LOG_Info", item.Info);
+            obj[10] = new SqlParameter("LOG_Checked", item.Checked);
+            obj[11] = new SqlParameter("LOG_PRowId", item.PRowId);
+            obj[12] = new SqlParameter("LOG_PTen", item.PTen);
 
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblLog_Insert_InsertNormal_linhnx", obj))
             {
@@ -83,21 +94,30 @@ namespace docsoft.entities
             return Item;
         }
 
-        public static Log Update(Log Updated)
+        public static Log Update(Log item)
         {
-            Log Item = new Log();
-            SqlParameter[] obj = new SqlParameter[11];
-            obj[0] = new SqlParameter("LOG_ID", Updated.ID);
-            obj[1] = new SqlParameter("LOG_LLOG_ID", Updated.LLOG_ID);
-            obj[2] = new SqlParameter("LOG_Ten", Updated.Ten);
-            obj[3] = new SqlParameter("LOG_Username", Updated.Username);
-            obj[4] = new SqlParameter("LOG_NgayTao", Updated.NgayTao);
-            obj[5] = new SqlParameter("LOG_RequestIp", Updated.RequestIp);
-            obj[6] = new SqlParameter("LOG_GiaTriCu", Updated.GiaTriCu);
-            obj[7] = new SqlParameter("LOG_GiaTriMoi", Updated.GiaTriMoi);
-            obj[8] = new SqlParameter("LOG_RawUrl", Updated.RawUrl);
-            obj[9] = new SqlParameter("LOG_Info", Updated.Info);
-            obj[10] = new SqlParameter("LOG_Checked", Updated.Checked);
+            var Item = new Log();
+            var obj = new SqlParameter[13];
+            obj[0] = new SqlParameter("LOG_ID", item.ID);
+            obj[1] = new SqlParameter("LOG_LLOG_ID", item.LLOG_ID);
+            obj[2] = new SqlParameter("LOG_Ten", item.Ten);
+            obj[3] = new SqlParameter("LOG_Username", item.Username);
+            if (item.NgayTao > DateTime.MinValue)
+            {
+                obj[4] = new SqlParameter("LOG_NgayTao", item.NgayTao);
+            }
+            else
+            {
+                obj[4] = new SqlParameter("LOG_NgayTao", DBNull.Value);
+            }
+            obj[5] = new SqlParameter("LOG_RequestIp", item.RequestIp);
+            obj[6] = new SqlParameter("LOG_GiaTriCu", item.GiaTriCu);
+            obj[7] = new SqlParameter("LOG_GiaTriMoi", item.GiaTriMoi);
+            obj[8] = new SqlParameter("LOG_RawUrl", item.RawUrl);
+            obj[9] = new SqlParameter("LOG_Info", item.Info);
+            obj[10] = new SqlParameter("LOG_Checked", item.Checked);
+            obj[11] = new SqlParameter("LOG_PRowId", item.PRowId);
+            obj[12] = new SqlParameter("LOG_PTen", item.PTen);
 
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblLog_Update_UpdateNormal_linhnx", obj))
             {
@@ -111,8 +131,8 @@ namespace docsoft.entities
 
         public static Log SelectById(Int32 LOG_ID)
         {
-            Log Item = new Log();
-            SqlParameter[] obj = new SqlParameter[1];
+            var Item = new Log();
+            var obj = new SqlParameter[1];
             obj[0] = new SqlParameter("LOG_ID", LOG_ID);
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblLog_Select_SelectById_linhnx", obj))
             {
@@ -126,7 +146,7 @@ namespace docsoft.entities
 
         public static LogCollection SelectAll()
         {
-            LogCollection List = new LogCollection();
+            var List = new LogCollection();
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblLog_Select_SelectAll_linhnx"))
             {
                 while (rd.Read())
@@ -136,35 +156,20 @@ namespace docsoft.entities
             }
             return List;
         }
-        public static Pager<Log> pagerNormal(string url, bool rewrite, string sort,string _username,string _IP ,string pagesize)
+        public static Pager<Log> pagerNormal(string url, bool rewrite, string sort, string q, int size)
         {
-            SqlParameter[] obj = new SqlParameter[2];
-            //if (string.IsNullOrEmpty(sort))
-            //{
-            //    obj[0] = new SqlParameter("Sort", DBNull.Value);
-            //}
-            //else
-            //{
-            //    obj[0] = new SqlParameter("Sort", sort);
-            //}
-            if (string.IsNullOrEmpty(_username))
+            var obj = new SqlParameter[2];
+            obj[0] = new SqlParameter("Sort", sort);
+            if (!string.IsNullOrEmpty(q))
             {
-                obj[0] = new SqlParameter("UserName", DBNull.Value);
+                obj[1] = new SqlParameter("q", q);
             }
             else
             {
-                obj[0] = new SqlParameter("UserName", _username);
+                obj[1] = new SqlParameter("q", DBNull.Value);
             }
-            if (string.IsNullOrEmpty(sort))
-            {
-                obj[1] = new SqlParameter("IP", DBNull.Value);
-            }
-            else
-            {
-                obj[1] = new SqlParameter("IP", _IP);
-            }
-            if (string.IsNullOrEmpty(pagesize)) pagesize = "50";
-            Pager<Log> pg = new Pager<Log>("sp_tblLog_Pager_Normal_linhnx", "page", Convert.ToInt32(pagesize), 10, rewrite, url, obj);
+
+            var pg = new Pager<Log>("sp_tblLog_Pager_Normal_linhnx", "page", size, 10, rewrite, url, obj);
             return pg;
         }
         #endregion
@@ -172,7 +177,7 @@ namespace docsoft.entities
         #region Utilities
         public static Log getFromReader(IDataReader rd)
         {
-            Log Item = new Log();
+            var Item = new Log();
             if (rd.FieldExists("LOG_ID"))
             {
                 Item.ID = (Int32)(rd["LOG_ID"]);
@@ -199,11 +204,11 @@ namespace docsoft.entities
             }
             if (rd.FieldExists("LOG_GiaTriCu"))
             {
-                Item.GiaTriCu = (XmlDocument)(rd["LOG_GiaTriCu"]);
+                Item.GiaTriCu = (String)(rd["LOG_GiaTriCu"]);
             }
             if (rd.FieldExists("LOG_GiaTriMoi"))
             {
-                Item.GiaTriMoi = (XmlDocument)(rd["LOG_GiaTriMoi"]);
+                Item.GiaTriMoi = (String)(rd["LOG_GiaTriMoi"]);
             }
             if (rd.FieldExists("LOG_RawUrl"))
             {
@@ -217,17 +222,32 @@ namespace docsoft.entities
             {
                 Item.Checked = (Boolean)(rd["LOG_Checked"]);
             }
+            if (rd.FieldExists("LOG_PRowId"))
+            {
+                Item.PRowId = (Guid)(rd["LOG_PRowId"]);
+            }
+            if (rd.FieldExists("LOG_PTen"))
+            {
+                Item.PTen = (String)(rd["LOG_PTen"]);
+            }
             return Item;
         }
         #endregion
+        public  delegate  Log logDele(Log item);
+        public static void log(object obj, Log item)
+        {
+            item.GiaTriMoi = Lib.XmlSerializeToString(obj);
+            Insert(item);
+            //var dele = new logDele(Insert);
+            //dele.BeginInvoke(item, null, null);
+        }
         #region Extend
-
+        
         #endregion
     }
     #endregion
 
     #endregion
-    
 }
 
 
