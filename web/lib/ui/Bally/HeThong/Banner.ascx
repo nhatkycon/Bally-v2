@@ -17,34 +17,28 @@
         <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">T/Năng<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thêm<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Thêm</a></li>
-                        <li><a href="#">Mới</a></li>
-                        <li><a href="#">Danh sách</a></li>
+                        <li><a href="/lib/pages/TiemNang/Add.aspx">Tiềm năng</a></li>
+                        <li><a href="/lib/pages/KhachHang/Add.aspx">Khách hàng</a></li>
+                        <li><a href="/lib/pages/ChamSoc/Add.aspx">Chăm sóc</a></li>
+                        <li><a href="/lib/pages/LichHen/Add.aspx">Lịch hẹn</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">K/Hàng<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marketing<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Thêm</a></li>
-                        <li><a href="#">Mới</a></li>
-                        <li><a href="#">Danh sách</a></li>
+                        <li><a href="/lib/pages/TiemNang/Default.aspx">Tiềm năng</a></li>
+                        <li><a href="/lib/pages/KhachHang/Default.aspx">Khách hàng</a></li>
+                        <li><a href="/lib/pages/ChamSoc/Default.aspx">Chăm sóc</a></li>
+                        <li><a href="/lib/pages/LichHen/Default.aspx">Lịch hẹn</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">L/Hẹn<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hoạt động<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Thêm</a></li>
-                        <li><a href="#">Mới</a></li>
-                        <li><a href="#">Danh sách</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">H/Động<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Dịch vụ</a></li>
-                        <li><a href="#">Làm dịch vụ</a></li>
+                        <li><a href="/lib/pages/DichVu/Default.aspx">Dịch vụ</a></li>
+                        <li><a href="/lib/pages/LamDichVu/Default.aspx">Làm dịch vụ</a></li>
                     </ul>
                 </li>
             </ul>
@@ -69,11 +63,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=Security.Username %> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="/lib/pages/Rek/My.aspx">Rek của tôi</a></li>
                   <li class="divider"></li>
-                  <li>
-                      <a href="#about" data-toggle="modal">Rek là gì?</a>
-                  </li>
                     <li>
                         <a href="javascript:;" class="logoutbtn">
                               Thoát

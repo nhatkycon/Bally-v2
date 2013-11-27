@@ -7,6 +7,20 @@ var bally = {
     , init: function () {
         bally.KhachHangFn();
         bally.KhachHangHeader();
+        bally.PageFn();
+    }
+    , PageFn: function () {
+        var logout = $('.logoutbtn');
+        logout.click(function () {
+            var data = { act: 'Logout' };
+            $.ajax({
+                url: bally.url
+                , data: data
+                , success: function () {
+                    document.location.reload();
+                }
+            });
+        });
     }
     , KhachHangHeader: function () {
         var pnl = $('.ModuleHeader');
@@ -49,7 +63,7 @@ var bally = {
                         if (ret == '0') {
                             alert('Chỉ người tạo mới có quyền xóa! Vui lòng thử lại');
                         } else {
-                            document.location.href = domain + '/lib/pages/KhachHang/Default.aspx';                        
+                            document.location.href = domain + '/lib/pages/KhachHang/Default.aspx';
                         }
                     }
                 });

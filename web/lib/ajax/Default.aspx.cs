@@ -176,6 +176,11 @@ public partial class lib_ajax_Default : BasedPage
                 }
                 break;
             #endregion
+            case "Logout":
+                #region logout this system
+                Security.LogOut();
+                break;
+                #endregion
             default:break;
         }
         
