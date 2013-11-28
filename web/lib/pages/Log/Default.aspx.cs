@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using docsoft.entities;
 using linh.core.dal;
 
@@ -18,7 +19,11 @@ public partial class lib_pages_Log_Default : System.Web.UI.Page
                                         , false, "LOG_NgayTao desc", q, Convert.ToInt32(size), username);
             paging = pg.Paging;
             DanhSach1.List = pg.List;
-            Username.List = MemberDal.SelectAll();
+            var users = new List<Member>();
+            users.Add(new Member() {ID = 0, Ten = ""});
+            var userList = MemberDal.SelectAll();
+            users.AddRange(userList);
+            Username.List = users;
         }
     }
 }
