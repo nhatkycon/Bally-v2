@@ -31,6 +31,7 @@ namespace pmSpa.entities
         public String NguoiCapNhat { get; set; }
         public Boolean BoQua { get; set; }
         public Boolean Xoa { get; set; }
+        public Boolean ThanhCong { get; set; }
         #endregion
         #region Contructor
         public SuKien()
@@ -66,7 +67,7 @@ namespace pmSpa.entities
         public static SuKien Insert(SuKien item)
         {
             var Item = new SuKien();
-            var obj = new SqlParameter[16];
+            var obj = new SqlParameter[17];
             obj[0] = new SqlParameter("SK_ID", item.ID);
             obj[1] = new SqlParameter("SK_DM_ID", item.DM_ID);
             obj[2] = new SqlParameter("SK_PID", item.PID);
@@ -111,6 +112,7 @@ namespace pmSpa.entities
             obj[13] = new SqlParameter("SK_NguoiCapNhat", item.NguoiCapNhat);
             obj[14] = new SqlParameter("SK_BoQua", item.BoQua);
             obj[15] = new SqlParameter("SK_Xoa", item.Xoa);
+            obj[16] = new SqlParameter("SK_ThanhCong", item.ThanhCong);
 
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblSpaMgr_SuKien_Insert_InsertNormal_linhnx", obj))
             {
@@ -125,7 +127,7 @@ namespace pmSpa.entities
         public static SuKien Update(SuKien item)
         {
             var Item = new SuKien();
-            var obj = new SqlParameter[16];
+            var obj = new SqlParameter[17];
             obj[0] = new SqlParameter("SK_ID", item.ID);
             obj[1] = new SqlParameter("SK_DM_ID", item.DM_ID);
             obj[2] = new SqlParameter("SK_PID", item.PID);
@@ -170,6 +172,7 @@ namespace pmSpa.entities
             obj[13] = new SqlParameter("SK_NguoiCapNhat", item.NguoiCapNhat);
             obj[14] = new SqlParameter("SK_BoQua", item.BoQua);
             obj[15] = new SqlParameter("SK_Xoa", item.Xoa);
+            obj[16] = new SqlParameter("SK_ThanhCong", item.ThanhCong);
 
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblSpaMgr_SuKien_Update_UpdateNormal_linhnx", obj))
             {
@@ -346,6 +349,10 @@ namespace pmSpa.entities
             if (rd.FieldExists("KH_Ten"))
             {
                 Item.KH_Ten = (String)(rd["KH_Ten"]);
+            }
+            if (rd.FieldExists("SK_ThanhCong"))
+            {
+                Item.ThanhCong = (Boolean)(rd["SK_ThanhCong"]);
             }
             return Item;
         }

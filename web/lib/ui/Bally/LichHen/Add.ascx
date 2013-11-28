@@ -12,6 +12,9 @@
         <%if (!string.IsNullOrEmpty(Id))
             {%>
             <a href="javascript:;" data-ret="<%=Ret %>" class="btn btn-primary savebtn">Lưu</a>
+            <a href="/lib/pages/DichVu/Add.aspx?KH_ID<%=Item.KH_ID %>" class="btn btn-success taoDichVubtn">
+                <i class="glyphicon glyphicon-share-alt"></i> D/vụ
+            </a>
             <%if(Item.NguoiTao == Security.Username){ %>
                 <a href="javascript:;" data-id="<%=Item.ID %>" class="btn btn-warning xoaBtn">Xóa</a>
             <%} %>
@@ -40,7 +43,7 @@
                     <%if (!string.IsNullOrEmpty(Item.KH_Ten)){ %>
                         <div class="help-block">
                             <a class="btn btn-link" href="/lib/pages/KhachHang/Add.aspx?ID=<%=Item.KH_ID %>&ret=<%=Server.UrlEncode(Request.Url.PathAndQuery) %>">
-                                <%=Item.KH_Ten %>
+                                <i class="glyphicon glyphicon-info-sign"></i> <%=Item.KH_Ten %>
                             </a>
                         </div>
                     <%} %>
@@ -109,6 +112,19 @@
                     <% } %>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="ThanhCong" class="col-sm-2 control-label">Thành công</label>
+                <div class="col-sm-10">
+                    <%if (Item.ThanhCong)
+                    {%>
+                        <input class="ThanhCong input-sm" id="ThanhCong" checked="checked" name="ThanhCong" type="checkbox"/>
+                    <%}
+                    else
+                    {%>
+                        <input class="ThanhCong input-sm" id="ThanhCong" name="ThanhCong" type="checkbox"/>
+                    <% } %>
+                </div>
+            </div>
             <%if (!string.IsNullOrEmpty(Id)){ %>
                 <div class="help-block">
                     <div class="well well-sm">
@@ -130,6 +146,9 @@
         <%if (!string.IsNullOrEmpty(Id))
             {%>
             <a href="javascript:;" data-ret="<%=Ret %>" class="btn btn-primary savebtn">Lưu</a>
+            <a href="/lib/pages/DichVu/Add.aspx?KH_ID<%=Item.KH_ID %>" class="btn btn-success taoDichVubtn">
+                <i class="glyphicon glyphicon-share-alt"></i> D/vụ
+            </a>
             <%if(Item.NguoiTao == Security.Username){ %>
                 <a href="javascript:;" data-id="<%=Item.ID %>" class="btn btn-warning xoaBtn">Xóa</a>
             <%} %>

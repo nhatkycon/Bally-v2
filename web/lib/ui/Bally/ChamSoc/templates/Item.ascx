@@ -18,6 +18,6 @@
         <%=Item.TT_Ten %>
     </td>
     <td>
-        <%=Item.NgayTao.ToString("hh:mm dd/MM") %>
+        <%=Item.NgayTao.ToString("hh:mm dd/MM/yyyy") %>
     </td>
 </tr>

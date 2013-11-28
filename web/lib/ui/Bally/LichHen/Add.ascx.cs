@@ -13,7 +13,10 @@ public partial class lib_ui_Bally_LichHen_Add : System.Web.UI.UserControl
     {
         Id = Request["ID"];
         Ret = Request["ret"];
-        if (!string.IsNullOrEmpty(Ret)) Ret = Server.UrlDecode(Ret);
+        if (!string.IsNullOrEmpty(Ret))
+        {
+            Ret = Server.UrlDecode(Ret);
+        }
         DM_ID.List = ListLoai;
     }
 }

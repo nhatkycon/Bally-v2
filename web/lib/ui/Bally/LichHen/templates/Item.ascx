@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Item.ascx.cs" Inherits="lib_ui_Bally_LichHen_templates_Item" %>
-<tr>
+<tr class="<%=Item.ThanhCong ? "success " : "" %><%=Item.BoQua ? "danger " : "" %>">
     <td>
         <a href="/lib/pages/LichHen/Add.aspx?ID=<%=Item.ID %>&ret=<%=Server.UrlEncode(Request.Url.PathAndQuery) %>">
             <%=Item.Ten %>            

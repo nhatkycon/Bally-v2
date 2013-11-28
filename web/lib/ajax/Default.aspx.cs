@@ -43,9 +43,11 @@ public partial class lib_ajax_Default : BasedPage
         var NhanVien = Request["NhanVien"];
         var MoTa = Request["MoTa"];
         var BoQua = Request["BoQua"];
-
+        var ThanhCong = Request["ThanhCong"];
+        var refUrl = Request["refUrl"];
         NgungTheoDoi = !string.IsNullOrEmpty(NgungTheoDoi) ? "true" : "false";
         BoQua = !string.IsNullOrEmpty(BoQua) ? "true" : "false";
+        ThanhCong = !string.IsNullOrEmpty(ThanhCong) ? "true" : "false";
         switch (act)
         {
             case "KhachHang-Add":
@@ -106,7 +108,7 @@ public partial class lib_ajax_Default : BasedPage
                             ,
                             RequestIp = Request.UserHostAddress
                             ,
-                            RawUrl = Request.Url.PathAndQuery
+                            RawUrl = refUrl
                             ,
                             LLOG_ID = 1
                             ,
@@ -136,7 +138,7 @@ public partial class lib_ajax_Default : BasedPage
                             ,
                             RequestIp = Request.UserHostAddress
                             ,
-                            RawUrl = Request.Url.PathAndQuery
+                            RawUrl = refUrl
                             ,
                             LLOG_ID = 2
                             ,
@@ -177,7 +179,7 @@ public partial class lib_ajax_Default : BasedPage
                             ,
                             RequestIp = Request.UserHostAddress
                             ,
-                            RawUrl = Request.Url.PathAndQuery
+                            RawUrl = refUrl
                             ,
                             LLOG_ID = 3
                             ,
@@ -221,7 +223,7 @@ public partial class lib_ajax_Default : BasedPage
                         ,
                         RequestIp = Request.UserHostAddress
                         ,
-                        RawUrl = Request.Url.PathAndQuery
+                        RawUrl = refUrl
                         ,
                         LLOG_ID = 4
                         ,
@@ -285,7 +287,7 @@ public partial class lib_ajax_Default : BasedPage
                             ,
                             RequestIp = Request.UserHostAddress
                             ,
-                            RawUrl = Request.Url.PathAndQuery
+                            RawUrl = refUrl
                             ,
                             LLOG_ID = 1
                             ,
@@ -315,7 +317,7 @@ public partial class lib_ajax_Default : BasedPage
                             ,
                             RequestIp = Request.UserHostAddress
                             ,
-                            RawUrl = Request.Url.PathAndQuery
+                            RawUrl = refUrl
                             ,
                             LLOG_ID = 2
                             ,
@@ -358,7 +360,7 @@ public partial class lib_ajax_Default : BasedPage
                             ,
                             RequestIp = Request.UserHostAddress
                             ,
-                            RawUrl = Request.Url.PathAndQuery
+                            RawUrl = refUrl
                             ,
                             LLOG_ID = 3
                             ,
@@ -404,6 +406,7 @@ public partial class lib_ajax_Default : BasedPage
                         item.DM_ID = new Guid(DM_ID);
                     }
                     item.BoQua = Convert.ToBoolean(BoQua);
+                    item.ThanhCong = Convert.ToBoolean(ThanhCong);
                     item.NhanVien = NhanVien;
                     if (IdNull)
                     {
@@ -427,7 +430,7 @@ public partial class lib_ajax_Default : BasedPage
                             ,
                             RequestIp = Request.UserHostAddress
                             ,
-                            RawUrl = Request.Url.PathAndQuery
+                            RawUrl = refUrl
                             ,
                             LLOG_ID = 1
                             ,
@@ -457,7 +460,7 @@ public partial class lib_ajax_Default : BasedPage
                             ,
                             RequestIp = Request.UserHostAddress
                             ,
-                            RawUrl = Request.Url.PathAndQuery
+                            RawUrl = refUrl
                             ,
                             LLOG_ID = 2
                             ,
@@ -500,7 +503,7 @@ public partial class lib_ajax_Default : BasedPage
                             ,
                             RequestIp = Request.UserHostAddress
                             ,
-                            RawUrl = Request.Url.PathAndQuery
+                            RawUrl = refUrl
                             ,
                             LLOG_ID = 3
                             ,

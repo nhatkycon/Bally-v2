@@ -21,7 +21,7 @@
                         S/Nhật
                     </th>
                     <th class="hidden-xs">
-                        Địa chỉ
+                        Đ/chỉ
                     </th>
                     <th class="hidden-xs">
                         Nguồn

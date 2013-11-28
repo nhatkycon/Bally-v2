@@ -25,7 +25,7 @@
     </div>
     <div class="panel-body">
         <div class="form-horizontal" role="form">
-            
+            <input id="Id" style="display: none;" value="<%=Item.ID == Guid.Empty ? string.Empty  : Item.ID.ToString() %>" name="Id" type="text" />
             <div class="form-group">
                 <label for="KH_Ten" class="col-sm-2 control-label">Khách hàng</label>
                 <div class="col-sm-10">
@@ -42,7 +42,7 @@
                     <%if (!string.IsNullOrEmpty(Item.KH_Ten)){ %>
                         <span class="help-block">
                             <a class="btn btn-link" href="/lib/pages/KhachHang/Add.aspx?ID=<%=Item.KH_ID %>&ret=<%=Server.UrlEncode(Request.Url.PathAndQuery) %>">
-                                <%=Item.KH_Ten %>
+                                <i class="glyphicon glyphicon-info-sign"></i> <%=Item.KH_Ten %>
                             </a>
                         </span>
                     <%} %>

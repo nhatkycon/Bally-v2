@@ -17,6 +17,7 @@ namespace pmSpa.entities
         #region Properties
         public Guid ID { get; set; }
         public Guid TV_ID { get; set; }
+        public Guid KH_ID { get; set; }
         public Guid DV_ID { get; set; }
         public DateTime NgayTao { get; set; }
         public String NguoiTao { get; set; }
@@ -71,36 +72,37 @@ namespace pmSpa.entities
         public static TuVanDichVu Insert(TuVanDichVu item)
         {
             var Item = new TuVanDichVu();
-            var obj = new SqlParameter[15];
+            var obj = new SqlParameter[16];
             obj[0] = new SqlParameter("TVDV_ID", item.ID);
-            obj[1] = new SqlParameter("TVDV_TV_ID", item.TV_ID);
-            obj[2] = new SqlParameter("TVDV_DV_ID", item.DV_ID);
+            obj[1] = new SqlParameter("TVDV_KH_ID", item.KH_ID);
+            obj[2] = new SqlParameter("TVDV_TV_ID", item.TV_ID);
+            obj[3] = new SqlParameter("TVDV_DV_ID", item.DV_ID);
             if (item.NgayTao > DateTime.MinValue)
             {
-                obj[3] = new SqlParameter("TVDV_NgayTao", item.NgayTao);
+                obj[4] = new SqlParameter("TVDV_NgayTao", item.NgayTao);
             }
             else
             {
-                obj[3] = new SqlParameter("TVDV_NgayTao", DBNull.Value);
+                obj[4] = new SqlParameter("TVDV_NgayTao", DBNull.Value);
             }
-            obj[4] = new SqlParameter("TVDV_NguoiTao", item.NguoiTao);
-            obj[5] = new SqlParameter("TVDV_Gia", item.Gia);
-            obj[6] = new SqlParameter("TVDV_GhiChu", item.GhiChu);
-            obj[7] = new SqlParameter("TVDV_SoLan", item.SoLan);
-            obj[8] = new SqlParameter("TVDV_ThanhToan", item.ThanhToan);
-            obj[9] = new SqlParameter("TVDV_ConNo", item.ConNo);
+            obj[5] = new SqlParameter("TVDV_NguoiTao", item.NguoiTao);
+            obj[6] = new SqlParameter("TVDV_Gia", item.Gia);
+            obj[7] = new SqlParameter("TVDV_GhiChu", item.GhiChu);
+            obj[8] = new SqlParameter("TVDV_SoLan", item.SoLan);
+            obj[9] = new SqlParameter("TVDV_ThanhToan", item.ThanhToan);
+            obj[10] = new SqlParameter("TVDV_ConNo", item.ConNo);
             if (item.NgayLap > DateTime.MinValue)
             {
-                obj[10] = new SqlParameter("TVDV_NgayLap", item.NgayLap);
+                obj[11] = new SqlParameter("TVDV_NgayLap", item.NgayLap);
             }
             else
             {
-                obj[10] = new SqlParameter("TVDV_NgayLap", DBNull.Value);
+                obj[11] = new SqlParameter("TVDV_NgayLap", DBNull.Value);
             }
-            obj[11] = new SqlParameter("TVDV_BaoHanh_ID", item.BaoHanh_ID);
-            obj[12] = new SqlParameter("TVDV_KHO_ID", item.KHO_ID);
-            obj[13] = new SqlParameter("TVDV_CK", item.CK);
-            obj[14] = new SqlParameter("TVDV_NhanVien", item.NhanVien);
+            obj[12] = new SqlParameter("TVDV_BaoHanh_ID", item.BaoHanh_ID);
+            obj[13] = new SqlParameter("TVDV_KHO_ID", item.KHO_ID);
+            obj[14] = new SqlParameter("TVDV_CK", item.CK);
+            obj[15] = new SqlParameter("TVDV_NhanVien", item.NhanVien);
 
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblSpaMgr_TuVanDichVu_Insert_InsertNormal_linhnx", obj))
             {
@@ -115,36 +117,37 @@ namespace pmSpa.entities
         public static TuVanDichVu Update(TuVanDichVu item)
         {
             var Item = new TuVanDichVu();
-            var obj = new SqlParameter[15];
+            var obj = new SqlParameter[16];
             obj[0] = new SqlParameter("TVDV_ID", item.ID);
-            obj[1] = new SqlParameter("TVDV_TV_ID", item.TV_ID);
-            obj[2] = new SqlParameter("TVDV_DV_ID", item.DV_ID);
+            obj[1] = new SqlParameter("TVDV_KH_ID", item.KH_ID);
+            obj[2] = new SqlParameter("TVDV_TV_ID", item.TV_ID);
+            obj[3] = new SqlParameter("TVDV_DV_ID", item.DV_ID);
             if (item.NgayTao > DateTime.MinValue)
             {
-                obj[3] = new SqlParameter("TVDV_NgayTao", item.NgayTao);
+                obj[4] = new SqlParameter("TVDV_NgayTao", item.NgayTao);
             }
             else
             {
-                obj[3] = new SqlParameter("TVDV_NgayTao", DBNull.Value);
+                obj[4] = new SqlParameter("TVDV_NgayTao", DBNull.Value);
             }
-            obj[4] = new SqlParameter("TVDV_NguoiTao", item.NguoiTao);
-            obj[5] = new SqlParameter("TVDV_Gia", item.Gia);
-            obj[6] = new SqlParameter("TVDV_GhiChu", item.GhiChu);
-            obj[7] = new SqlParameter("TVDV_SoLan", item.SoLan);
-            obj[8] = new SqlParameter("TVDV_ThanhToan", item.ThanhToan);
-            obj[9] = new SqlParameter("TVDV_ConNo", item.ConNo);
+            obj[5] = new SqlParameter("TVDV_NguoiTao", item.NguoiTao);
+            obj[6] = new SqlParameter("TVDV_Gia", item.Gia);
+            obj[7] = new SqlParameter("TVDV_GhiChu", item.GhiChu);
+            obj[8] = new SqlParameter("TVDV_SoLan", item.SoLan);
+            obj[9] = new SqlParameter("TVDV_ThanhToan", item.ThanhToan);
+            obj[10] = new SqlParameter("TVDV_ConNo", item.ConNo);
             if (item.NgayLap > DateTime.MinValue)
             {
-                obj[10] = new SqlParameter("TVDV_NgayLap", item.NgayLap);
+                obj[11] = new SqlParameter("TVDV_NgayLap", item.NgayLap);
             }
             else
             {
-                obj[10] = new SqlParameter("TVDV_NgayLap", DBNull.Value);
+                obj[11] = new SqlParameter("TVDV_NgayLap", DBNull.Value);
             }
-            obj[11] = new SqlParameter("TVDV_BaoHanh_ID", item.BaoHanh_ID);
-            obj[12] = new SqlParameter("TVDV_KHO_ID", item.KHO_ID);
-            obj[13] = new SqlParameter("TVDV_CK", item.CK);
-            obj[14] = new SqlParameter("TVDV_NhanVien", item.NhanVien);
+            obj[12] = new SqlParameter("TVDV_BaoHanh_ID", item.BaoHanh_ID);
+            obj[13] = new SqlParameter("TVDV_KHO_ID", item.KHO_ID);
+            obj[14] = new SqlParameter("TVDV_CK", item.CK);
+            obj[15] = new SqlParameter("TVDV_NhanVien", item.NhanVien);
 
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblSpaMgr_TuVanDichVu_Update_UpdateNormal_linhnx", obj))
             {
@@ -199,9 +202,6 @@ namespace pmSpa.entities
             var pg = new Pager<TuVanDichVu>("sp_tblSpaMgr_TuVanDichVu_Pager_Normal_linhnx", "page", size, 10, rewrite, url, obj);
             return pg;
         }
-        #endregion
-
-        #region Utilities
         public static TuVanDichVu SelectById(SqlConnection con, Guid TVDV_ID)
         {
             var Item = new TuVanDichVu();
@@ -216,12 +216,20 @@ namespace pmSpa.entities
             }
             return Item;
         }
+        #endregion
+
+        #region Utilities
+        
         public static TuVanDichVu getFromReader(IDataReader rd)
         {
             var Item = new TuVanDichVu();
             if (rd.FieldExists("TVDV_ID"))
             {
                 Item.ID = (Guid)(rd["TVDV_ID"]);
+            }
+            if (rd.FieldExists("TVDV_KH_ID"))
+            {
+                Item.KH_ID = (Guid)(rd["TVDV_KH_ID"]);
             }
             if (rd.FieldExists("TVDV_TV_ID"))
             {

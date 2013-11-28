@@ -14,7 +14,7 @@ ul,li, ol {
     font-family: 'Marck Script', cursive;
     font-size: 18pt;
     font-weight: bold;
-    visibility: hidden;
+    /*visibility: hidden;*/
 }
 .imgfinder-box {
     display: inline-block; 

@@ -27,7 +27,7 @@ namespace docsoft.plugin.hethong.quanlyLog
                     if (string.IsNullOrEmpty(jgrsidx)) jgrsidx = "ID";
                     if (string.IsNullOrEmpty(jgrsord)) jgrsord = "asc";
 
-                    Pager<Log> PagerGet = LogDal.pagerNormal("", false, "LOG_" + jgrsidx + " " + jgrsord,_userName,_IP, Request["rows"]);
+                    Pager<Log> PagerGet = LogDal.pagerNormal("", false, "LOG_" + jgrsidx + " " + jgrsord,_userName,Convert.ToInt32(jgRows), null);
 
                     List<jgridRow> ListRow = new List<jgridRow>();
                     foreach (Log log in PagerGet.List)

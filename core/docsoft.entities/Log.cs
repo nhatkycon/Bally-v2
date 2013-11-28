@@ -128,13 +128,16 @@ namespace docsoft.entities
             }
             return Item;
         }
-
         public static Log SelectById(Int32 LOG_ID)
+        {
+            return SelectById(DAL.con(), LOG_ID);
+        }
+        public static Log SelectById(SqlConnection con, Int32 LOG_ID)
         {
             var Item = new Log();
             var obj = new SqlParameter[1];
             obj[0] = new SqlParameter("LOG_ID", LOG_ID);
-            using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblLog_Select_SelectById_linhnx", obj))
+            using (IDataReader rd = SqlHelper.ExecuteReader(con, CommandType.StoredProcedure, "sp_tblLog_Select_SelectById_linhnx", obj))
             {
                 while (rd.Read())
                 {
@@ -155,10 +158,15 @@ namespace docsoft.entities
                 }
             }
             return List;
+        
         }
-        public static Pager<Log> pagerNormal(string url, bool rewrite, string sort, string q, int size)
+        public static Pager<Log> pagerNormal(string url, bool rewrite, string sort, string q, int size, string Username)
         {
-            var obj = new SqlParameter[2];
+            return pagerNormal(DAL.con(), url, rewrite, sort, q, size, Username);
+        }
+        public static Pager<Log> pagerNormal(SqlConnection con, string url, bool rewrite, string sort, string q, int size, string Username)
+        {
+            var obj = new SqlParameter[3];
             obj[0] = new SqlParameter("Sort", sort);
             if (!string.IsNullOrEmpty(q))
             {
@@ -168,8 +176,15 @@ namespace docsoft.entities
             {
                 obj[1] = new SqlParameter("q", DBNull.Value);
             }
-
-            var pg = new Pager<Log>("sp_tblLog_Pager_Normal_linhnx", "page", size, 10, rewrite, url, obj);
+            if (!string.IsNullOrEmpty(Username))
+            {
+                obj[2] = new SqlParameter("Username", Username);
+            }
+            else
+            {
+                obj[2] = new SqlParameter("Username", DBNull.Value);
+            }
+            var pg = new Pager<Log>(con, "sp_tblLog_Pager_Normal_linhnx", "page", size, 10, rewrite, url, obj);
             return pg;
         }
         #endregion

@@ -3,7 +3,7 @@
 });
 
 var bally = {
-    url: domain + '/lib/ajax/Default.aspx?ref=' + Math.random()
+    url: domain + '/lib/ajax/Default.aspx?ref=' + Math.random() + '&refUrl=' + document.location.href
     , init: function () {
         bally.PageFn();
         bally.KhachHangFn();
