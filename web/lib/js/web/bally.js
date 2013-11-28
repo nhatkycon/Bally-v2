@@ -10,6 +10,7 @@ var bally = {
         bally.KhachHangHeader();
         bally.TiemNangFn();
         bally.ChamSocFn();
+        bally.LichHenFn();
     }
     , PageFn: function () {
         var logout = $('.logoutbtn');
@@ -81,7 +82,7 @@ var bally = {
                 url: bally.url
                 , data: data
                 , success: function (ret) {
-                    
+
                     if (returnUrl != '') {
                         if (returnUrl.indexOf('?') < 0) {
                             returnUrl = returnUrl + '?';
@@ -90,7 +91,7 @@ var bally = {
                     } else {
                         returnUrl = domain + '/lib/pages/KhachHang/Add.aspx?ID=' + ret;
                     }
-                    //document.location.href = returnUrl;
+                    document.location.href = returnUrl;
                 }
                 , error: function (xhr, ajaxOptions, thrownError) {
                     alert(xhr.status);
@@ -192,17 +193,17 @@ var bally = {
             $('.imgfinder-img').attr('src', '');
         });
     }
-    , ChamSocFn:function () {
+    , ChamSocFn: function () {
         var pnl = $('.ChamSoc-Pnl-Add');
         if ($(pnl).length < 1) return;
-        
+
         var savebtn = pnl.find('.savebtn');
         var xoaBtn = pnl.find('.xoaBtn');
-        
+
         var khId = pnl.find('.KH_ID');
         var khTen = pnl.find('.KH_Ten');
         var btnHintKh = pnl.find('.btnHintKH');
-        
+
         adm.regType(typeof (DanhSachKhachHangFn), 'appStore.pmSpa.khachHangMgr.DanhSachKhachHang.Class1, appStore.pmSpa.khachHangMgr', function () {
             DanhSachKhachHangFn.autoCompleteSearch(khTen, function (event, ui) {
                 khId.val(ui.item.id);
@@ -214,7 +215,7 @@ var bally = {
                 khTen.autocomplete('search', '');
             });
         });
-        
+
         xoaBtn.click(function () {
             var data = pnl.find(':input').serializeArray();
             data.push({ name: 'act', value: 'ChamSoc-Xoa' });
@@ -240,7 +241,7 @@ var bally = {
                 url: bally.url
                 , data: data
                 , success: function (ret) {
-                    
+
                     if (returnUrl != '') {
                         if (returnUrl.indexOf('?') < 0) {
                             returnUrl = returnUrl + '?';
@@ -248,6 +249,92 @@ var bally = {
                         returnUrl = domain + returnUrl;
                     } else {
                         returnUrl = domain + '/lib/pages/ChamSoc/Add.aspx?ID=' + ret;
+                    }
+                    document.location.href = returnUrl;
+                }
+            });
+        });
+    }
+    , LichHenFn: function () {
+        var pnl = $('.LichHen-Pnl-Add');
+        if ($(pnl).length < 1) return;
+
+        var savebtn = pnl.find('.savebtn');
+        var xoaBtn = pnl.find('.xoaBtn');
+
+
+        var ngayBatDauPicker = pnl.find('#NgayBatDauPicker');
+        ngayBatDauPicker.datetimepicker({
+            language: 'vi-Vn'
+        });
+
+        var khId = pnl.find('.KH_ID');
+        var khTen = pnl.find('.KH_Ten');
+        var btnHintKh = pnl.find('.btnHintKH');
+
+        adm.regType(typeof (DanhSachKhachHangFn), 'appStore.pmSpa.khachHangMgr.DanhSachKhachHang.Class1, appStore.pmSpa.khachHangMgr', function () {
+            DanhSachKhachHangFn.autoCompleteSearch(khTen, function (event, ui) {
+                khId.val(ui.item.id);
+            });
+            khTen.unbind('click').click(function () {
+                khTen.autocomplete('search', '');
+            });
+            btnHintKh.unbind('click').click(function () {
+                khTen.autocomplete('search', '');
+            });
+        });
+
+
+        var nhanVienTen = pnl.find('.NhanVien_Ten');
+        var nhanVien = pnl.find('.NhanVien');
+        var btnHintNv = pnl.find('.btnHintNv');
+
+        adm.regType(typeof (thanhvien), 'docsoft.plugin.hethong.thanhvien.Class1, docsoft.plugin.hethong.thanhvien', function () {
+            thanhvien.setAutocomplete(nhanVienTen, function (event, ui) {
+                nhanVienTen.val(ui.item.label);
+                nhanVien.val(ui.item.value);
+            });
+            nhanVienTen.unbind('click').click(function () {
+                nhanVienTen.autocomplete('search', '');
+            });
+            btnHintNv.unbind('click').click(function () {
+                nhanVienTen.autocomplete('search', '');
+            });
+        });
+
+        xoaBtn.click(function () {
+            var data = pnl.find(':input').serializeArray();
+            data.push({ name: 'act', value: 'LichHen-Xoa' });
+            $.ajax({
+                url: bally.url
+                , data: data
+                , success: function (ret) {
+                    if (ret == '0') {
+                        alert('Chỉ người tạo mới có quyền xóa! Vui lòng thử lại');
+                    } else {
+                        document.location.href = domain + '/lib/pages/LichHen/Default.aspx';
+                    }
+                }
+            });
+        });
+
+        savebtn.click(function () {
+            var item = $(this);
+            var returnUrl = item.attr('data-ret');
+            var data = pnl.find(':input').serializeArray();
+            data.push({ name: 'act', value: 'LichHen-Add' });
+            $.ajax({
+                url: bally.url
+                , data: data
+                , success: function (ret) {
+
+                    if (returnUrl != '') {
+                        if (returnUrl.indexOf('?') < 0) {
+                            returnUrl = returnUrl + '?';
+                        }
+                        returnUrl = domain + returnUrl;
+                    } else {
+                        returnUrl = domain + '/lib/pages/LichHen/Add.aspx?ID=' + ret;
                     }
                     document.location.href = returnUrl;
                 }

@@ -13,7 +13,7 @@
         <%} %>
         <%if (!string.IsNullOrEmpty(Id))
             {%>
-            <a href="javascript:;" class="btn btn-primary savebtn">Lưu</a>
+            <a href="javascript:;" data-ret="<%=Ret %>" class="btn btn-primary savebtn">Lưu</a>
             <%if(Item.NguoiTao == Security.Username){ %>
                 <a href="javascript:;" data-id="<%=Item.ID %>" class="btn btn-warning xoaBtn">Xóa</a>
             <%} %>
@@ -41,7 +41,7 @@
                     </div>
                     <%if (!string.IsNullOrEmpty(Item.KH_Ten)){ %>
                         <span class="help-block">
-                            <a class="btn btn-link" href="/lib/pages/KhachHang/Add.aspx?ID=<%=Item.KH_ID %>">
+                            <a class="btn btn-link" href="/lib/pages/KhachHang/Add.aspx?ID=<%=Item.KH_ID %>&ret=<%=Server.UrlEncode(Request.Url.PathAndQuery) %>">
                                 <%=Item.KH_Ten %>
                             </a>
                         </span>
@@ -72,6 +72,14 @@
                     <textarea id="NoiDung" name="NoiDung" type="text" rows="3" class="form-control"><%=Item.NoiDung %></textarea>
                 </div>
             </div>
+            <%if (!string.IsNullOrEmpty(Id)){ %>
+                <div class="help-block">
+                    <div class="well well-sm">
+                        <i class="glyphicon glyphicon-info-sign"></i>
+                        <strong><%=Item.NguoiTao %></strong> tạo ngày <%=Item.NgayTao.ToString("HH:mm dd/MM/yyyy") %>
+                    </div>
+                </div>
+            <%} %>
         </div>
     </div>
     <div class="panel-footer">
@@ -83,7 +91,7 @@
         <%} %>
         <%if (!string.IsNullOrEmpty(Id))
             {%>
-            <a href="javascript:;" class="btn btn-primary savebtn">Lưu</a>
+            <a href="javascript:;" data-ret="<%=Ret %>" class="btn btn-primary savebtn">Lưu</a>
             <%if(Item.NguoiTao == Security.Username){ %>
                 <a href="javascript:;" data-id="<%=Item.ID %>" class="btn btn-warning xoaBtn">Xóa</a>
             <%} %>

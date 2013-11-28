@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Item.ascx.cs" Inherits="lib_ui_Bally_ChamSoc_templates_Item" %>
 <tr>
     <td>
-        <a href="/lib/pages/ChamSoc/Add.aspx?ID=<%=Item.ID %>">
+        <a href="/lib/pages/ChamSoc/Add.aspx?ID=<%=Item.ID %>&ret=<%=Server.UrlEncode(Request.Url.PathAndQuery) %>">
             <%=Item.Ma %>            
         </a>
     </td>

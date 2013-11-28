@@ -56,7 +56,7 @@
         <div class="col-sm-10">
             <div id="NgaySinhPicker" class="input-append date input-group">
                 <input 
-                    value="<%=Item.NgaySinh == DateTime.MinValue ?  DateTime.Now.ToString("hh:mm dd/MM/yyyy") : Item.NgaySinh.ToString("hh:mm dd/MM/yyyy") %>"
+                    value="<%=Item.NgaySinh == DateTime.MinValue ?  DateTime.Now.ToString("hh:mm dd/MM/yyyy") : "" %>"
                     data-format="hh:mm dd/MM/yyyy" 
                     class="form-control NgaySinh" 
                     id="NgaySinh" 
@@ -105,7 +105,22 @@
         <div class="col-sm-10">
             <textarea id="DiaChi" name="DiaChi" type="text" rows="3" class="form-control"><%=Item.DiaChi %></textarea>
         </div>
-    </div>           
+    </div>
+    <div class="form-group">
+        <label for="ThoiGianGoiDien" class="col-sm-2 control-label">Thời gian gọi điện</label>
+        <div class="col-sm-10">
+            <textarea id="ThoiGianGoiDien" name="ThoiGianGoiDien" type="text" rows="3" class="form-control"><%=Item.ThoiGianGoiDien %></textarea>
+        </div>
+    </div>
+    <%if (!string.IsNullOrEmpty(Id)){ %>
+        <div class="help-block">
+            <div class="well well-sm">
+                <i class="glyphicon glyphicon-info-sign"></i>
+                <strong><%=Item.NguoiTao %></strong> tạo ngày <%=Item.NgayTao.ToString("HH:mm dd/MM/yyyy") %>.
+                <strong><%=Item.NguoiCapNhat %></strong> sửa lúc <%=Item.NgayCapNhat.ToString("HH:mm dd/MM/yyyy") %>
+            </div>
+        </div>
+    <%} %>         
 </div>
 <%if (!string.IsNullOrEmpty(Id))
 {%>

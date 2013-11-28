@@ -15,7 +15,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="dropdown">
+                <%--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thêm<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="/lib/pages/TiemNang/Add.aspx">Tiềm năng</a></li>
@@ -23,14 +23,18 @@
                         <li><a href="/lib/pages/ChamSoc/Add.aspx">Chăm sóc</a></li>
                         <li><a href="/lib/pages/LichHen/Add.aspx">Lịch hẹn</a></li>
                     </ul>
-                </li>
+                </li>--%>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marketing<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/lib/pages/TiemNang/Default.aspx">Tiềm năng</a></li>
-                        <li><a href="/lib/pages/KhachHang/Default.aspx">Khách hàng</a></li>
-                        <li><a href="/lib/pages/ChamSoc/Default.aspx">Chăm sóc</a></li>
-                        <li><a href="/lib/pages/LichHen/Default.aspx">Lịch hẹn</a></li>
+                        <% foreach (var item in List)
+                           {%>
+                           <li>
+                               <a href="<%=item.Url %>">
+                                   <%=item.Ten %>
+                               </a>
+                           </li>
+                         <%  } %>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -62,10 +66,16 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=Security.Username %> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                    <li>
+                        <a href="mailto:linh_net@yahoo.com">
+                            <i class="glyphicon glyphicon-info-sign"></i> Hỗ trợ
+                        </a>
+                    </li>
                   <li class="divider"></li>
                     <li>
-                        <a href="javascript:;" class="logoutbtn"> Thoát <i class="icon icon-signout"></i>
-                          </a>
+                        <a href="javascript:;" class="logoutbtn">
+                            <i class="glyphicon glyphicon-log-out"></i> Thoát
+                        </a>
                     </li>
                 </ul>
               </li>

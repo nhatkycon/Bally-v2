@@ -9,23 +9,17 @@
             <th class="">
                 Tên
             </th>
-            <th class="hidden-xs hidden-sm">
-                Face
-            </th>
-            <th class="">
-                Mobile
-            </th>
-            <th class="hidden-xs">
-                Ym
-            </th>
             <th class="hidden-xs">
                 Địa chỉ
             </th>
             <th class="hidden-xs">
                 Khu vực
             </th>
+            <th class="">
+                Nguồn
+            </th>
             <th class="hidden-xs">
-                Nguồn gốc
+                Ngày
             </th>
         </tr>    
     </thead>

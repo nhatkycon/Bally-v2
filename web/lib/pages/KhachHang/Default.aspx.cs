@@ -17,7 +17,7 @@ public partial class lib_pages_KhachHang_Default : System.Web.UI.Page
         using (var con = DAL.con())
         {
             var pg =
-                KhachHangDal.pagerAll(
+                KhachHangDal.pagerAll(con,
                     string.Format("?q={0}&size={1}&KhuVuc_Id={2}&NguonGoc_Id={3}&LinhVuc_Id={4}&", q, size, khuVucId,
                                   nguonGocId, linhVucId) + "{1}={0}", false, null, q, Convert.ToInt32(size), khuVucId,
                     nguonGocId, linhVucId, "0");

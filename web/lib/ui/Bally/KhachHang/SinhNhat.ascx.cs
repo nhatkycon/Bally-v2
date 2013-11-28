@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using pmSpa.entities;
 
-public partial class lib_ui_Bally_LichHen_DanhSach : System.Web.UI.UserControl
+public partial class lib_ui_Bally_KhachHang_SinhNhat : System.Web.UI.UserControl
 {
-    public List<SuKien> List { get; set; }
+    public List<KhachHang> List { get; set; }
+    public string Target { get; set; }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (List == null) return;

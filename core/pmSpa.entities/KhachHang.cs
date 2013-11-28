@@ -515,6 +515,10 @@ namespace pmSpa.entities
         #region Extend
         public static Pager<KhachHang> pagerAll(string url, bool rewrite, string sort, string q, int size, string KhuVuc_ID, string NguonGoc_Id, string LinhVuc_Id, string TiemNang)
         {
+            return pagerAll(DAL.con(),url,rewrite,sort,q,size,KhuVuc_ID,NguonGoc_Id,LinhVuc_Id,TiemNang);
+        }
+        public static Pager<KhachHang> pagerAll(SqlConnection con, string url, bool rewrite, string sort, string q, int size, string KhuVuc_ID, string NguonGoc_Id, string LinhVuc_Id, string TiemNang)
+        {
             var obj = new SqlParameter[6];
             obj[0] = new SqlParameter("Sort", sort);
             if (!string.IsNullOrEmpty(q))
@@ -557,7 +561,7 @@ namespace pmSpa.entities
             {
                 obj[5] = new SqlParameter("TiemNang", DBNull.Value);
             }
-            var pg = new Pager<KhachHang>("sp_tblSpaMgr_KhachHang_Pager_pagerAll_linhnx", "page", size, 10, rewrite, url, obj);
+            var pg = new Pager<KhachHang>(con,"sp_tblSpaMgr_KhachHang_Pager_pagerAll_linhnx", "page", size, 10, rewrite, url, obj);
             return pg;
         }
         public static KhachHang SelectById(Guid KH_ID, SqlConnection con)

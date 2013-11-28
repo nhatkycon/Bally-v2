@@ -18,6 +18,10 @@ public partial class lib_pages_TiemNang_Add : System.Web.UI.Page
             else
             {
                 Add1.Item = KhachHangDal.SelectById(new Guid(id));
+                var listChamSoc = ChamSocDal.SelectByKhId(con, id);
+                Add1.ChamSocs = listChamSoc;
+                var listSuKien = SuKienDal.SelectByKhId(con, null, "100", id);
+                Add1.SuKiens = listSuKien;
             }
 
             var nguonGocList = DanhMucDal.SelectByLDMMa(con, "NGUON-KH");

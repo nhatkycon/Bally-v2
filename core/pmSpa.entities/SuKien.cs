@@ -208,9 +208,11 @@ namespace pmSpa.entities
             }
             return List;
         }
-        public static Pager<SuKien> pagerNormal(string url, bool rewrite, string sort, string q, int size)
+        public static Pager<SuKien> pagerNormal(string url, bool rewrite, string sort, string q
+            , int size
+            ,string DM_ID, string KH_ID, string NhanVien, string BoQua, string Xoa)
         {
-            var obj = new SqlParameter[2];
+            var obj = new SqlParameter[7];
             obj[0] = new SqlParameter("Sort", sort);
             if (!string.IsNullOrEmpty(q))
             {
@@ -220,7 +222,46 @@ namespace pmSpa.entities
             {
                 obj[1] = new SqlParameter("q", DBNull.Value);
             }
-
+            if (!string.IsNullOrEmpty(DM_ID))
+            {
+                obj[2] = new SqlParameter("DM_ID", DM_ID);
+            }
+            else
+            {
+                obj[2] = new SqlParameter("DM_ID", DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(KH_ID))
+            {
+                obj[3] = new SqlParameter("KH_ID", KH_ID);
+            }
+            else
+            {
+                obj[3] = new SqlParameter("KH_ID", DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(NhanVien))
+            {
+                obj[4] = new SqlParameter("NhanVien", NhanVien);
+            }
+            else
+            {
+                obj[4] = new SqlParameter("NhanVien", DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(BoQua))
+            {
+                obj[5] = new SqlParameter("BoQua", BoQua);
+            }
+            else
+            {
+                obj[5] = new SqlParameter("BoQua", DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(Xoa))
+            {
+                obj[6] = new SqlParameter("Xoa", Xoa);
+            }
+            else
+            {
+                obj[6] = new SqlParameter("Xoa", DBNull.Value);
+            }
             var pg = new Pager<SuKien>("sp_tblSpaMgr_SuKien_Pager_Normal_linhnx", "page", size, 10, rewrite, url, obj);
             return pg;
         }
@@ -373,6 +414,28 @@ namespace pmSpa.entities
                 obj[2] = new SqlParameter("KH_ID", DBNull.Value);
             }
             using (IDataReader rd = SqlHelper.ExecuteReader(con, CommandType.StoredProcedure, "sp_tblSpaMgr_SuKien_Select_SelectByKhId_linhnx", obj))
+            {
+                while (rd.Read())
+                {
+                    List.Add(getFromReader(rd));
+                }
+            }
+            return List;
+        }
+        public static SuKienCollection SelectUpcoming(SqlConnection con, string top)
+        {
+            var List = new SuKienCollection();
+            var obj = new SqlParameter[2];
+
+            if (!string.IsNullOrEmpty(top))
+            {
+                obj[1] = new SqlParameter("top", top);
+            }
+            else
+            {
+                obj[1] = new SqlParameter("top", DBNull.Value);
+            }
+            using (IDataReader rd = SqlHelper.ExecuteReader(con, CommandType.StoredProcedure, "sp_tblSpaMgr_SuKien_Select_SelectUpcoming_linhnx", obj))
             {
                 while (rd.Read())
                 {

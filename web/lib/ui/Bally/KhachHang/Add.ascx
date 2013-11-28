@@ -1,7 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Add.ascx.cs" Inherits="lib_ui_Bally_KhachHang_Add" %>
 <%@ Import Namespace="docsoft" %>
 <%@ Register src="~/lib/ui/Bally/KhachHang/templates/Add.ascx" tagname="Add" tagprefix="uc1" %>
-<%@ Register src="../ChamSoc/DanhSach.ascx" tagname="DanhSach" tagprefix="uc2" %>
+<%@ Register src="~/lib/ui/Bally/ChamSoc/DanhSach.ascx" tagname="DanhSach" tagprefix="uc2" %>
+<%@ Register src="~/lib/ui/Bally/LichHen/DanhSach.ascx" tagname="DanhSach" tagprefix="uc3" %>
 <div class="panel panel-default KhachHang-Pnl-Add">
     <div class="panel-heading">
         <%if (string.IsNullOrEmpty(Ret))
@@ -46,19 +47,28 @@
     </div>
 </div>
 <%if(!string.IsNullOrEmpty(Id)){ %>
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="panel panel-default">    
+    <div class="panel-body">
+        <h3>Chăm sóc</h3>        
+        <hr/>
         <a href="/lib/pages/ChamSoc/Add.aspx?ret=<%=Server.UrlEncode(Request.Url.PathAndQuery) %>&KH_ID=<%=Item.ID %>" class="btn btn-primary">Thêm</a>
         <a href="" class="btn btn-success">
             <i class="glyphicon glyphicon-refresh"></i>
-        </a>
-    </div>
-    <div class="panel-body">
-        <uc2:DanhSach ID="DanhSach1" runat="server" />
-    </div>
-    <div class="panel-footer">
-        
-    </div>
+        </a>        
+    </div>    
 </div>
+<uc2:DanhSach ID="DanhSach1" runat="server" />
+
+<div class="panel panel-default">    
+    <div class="panel-body">
+        <h3>Lịch hẹn</h3>        
+        <hr/>
+        <a href="/lib/pages/LichHen/Add.aspx?ret=<%=Server.UrlEncode(Request.Url.PathAndQuery) %>&KH_ID=<%=Item.ID %>" class="btn btn-primary">Thêm</a>
+        <a href="" class="btn btn-success">
+            <i class="glyphicon glyphicon-refresh"></i>
+        </a>        
+    </div>    
+</div>
+<uc3:DanhSach ID="DanhSach2" runat="server" />
 <%} %>
 <script src="/lib/js/ckfinder/ckfinder.js" type="text/javascript"></script>                
