@@ -102,3 +102,12 @@
         <%} %>
     </div>
 </div>
+<%if (!string.IsNullOrEmpty(Id))
+{%>
+<script>
+    $(function () {
+        $('.TT_ID').val('<%=Item.TT_ID %>');
+        $('.LOAI_ID').val('<%=Item.LOAI_ID %>');
+    })
+</script>
+<%} %>
