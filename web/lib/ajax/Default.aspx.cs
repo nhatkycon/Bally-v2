@@ -45,6 +45,8 @@ public partial class lib_ajax_Default : BasedPage
         var BoQua = Request["BoQua"];
         var ThanhCong = Request["ThanhCong"];
         var refUrl = Request["refUrl"];
+        if (!string.IsNullOrEmpty(refUrl))
+            refUrl = Server.UrlDecode(refUrl);
         NgungTheoDoi = !string.IsNullOrEmpty(NgungTheoDoi) ? "true" : "false";
         BoQua = !string.IsNullOrEmpty(BoQua) ? "true" : "false";
         ThanhCong = !string.IsNullOrEmpty(ThanhCong) ? "true" : "false";
