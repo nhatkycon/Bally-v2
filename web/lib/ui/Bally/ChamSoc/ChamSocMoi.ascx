@@ -3,7 +3,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-title">
-        Chăm sóc khách hàng          
+        <a href="/lib/pages/ChamSoc/Default.aspx">Chăm sóc khách hàng</a>
         </div>
     </div>
     <div class="panel-body">

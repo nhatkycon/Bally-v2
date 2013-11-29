@@ -14,6 +14,9 @@
         <%if (!string.IsNullOrEmpty(Id))
             {%>
             <a href="javascript:;" data-ret="<%=Ret %>" class="btn btn-primary savebtn">Lưu</a>
+            <a href="/lib/pages/TuVanDichVu/Add.aspx?KH_ID=<%=Item.KH_ID %>" class="btn btn-success taoDichVubtn">
+                <i class="glyphicon glyphicon-share-alt"></i> D/vụ
+            </a>
             <%if(Item.NguoiTao == Security.Username){ %>
                 <a href="javascript:;" data-id="<%=Item.ID %>" class="btn btn-warning xoaBtn">Xóa</a>
             <%} %>
@@ -91,6 +94,9 @@
         <%} %>
         <%if (!string.IsNullOrEmpty(Id))
             {%>
+            <a href="/lib/pages/TuVanDichVu/Add.aspx?KH_ID=<%=Item.KH_ID %>" class="btn btn-success taoDichVubtn">
+                <i class="glyphicon glyphicon-share-alt"></i> D/vụ
+            </a>
             <a href="javascript:;" data-ret="<%=Ret %>" class="btn btn-primary savebtn">Lưu</a>
             <%if(Item.NguoiTao == Security.Username){ %>
                 <a href="javascript:;" data-id="<%=Item.ID %>" class="btn btn-warning xoaBtn">Xóa</a>

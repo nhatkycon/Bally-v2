@@ -8,7 +8,7 @@
         <a href="/lib/pages/TiemNang/Default.aspx" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i></a>
         <%if (!string.IsNullOrEmpty(Id))
             {%>
-            <a href="javascript:;" class="btn btn-primary btn-large savebtn">Lưu</a>
+            <a href="javascript:;" data-ret="<%=Ret %>"  class="btn btn-primary btn-large savebtn">Lưu</a>
             
             <%if(Item.NguoiTao == Security.Username){ %>
                 <a href="javascript:;" class="btn btn-success upgradebtn">
@@ -29,7 +29,7 @@
         <a href="/lib/pages/TiemNang/Default.aspx" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i></a>
         <%if (!string.IsNullOrEmpty(Id))
             {%>
-            <a href="javascript:;" class="btn btn-primary savebtn">Lưu</a>
+            <a href="javascript:;" data-ret="<%=Ret %>"  class="btn btn-primary savebtn">Lưu</a>
             <%if(Item.NguoiTao == Security.Username){ %>
                 <a href="javascript:;" class="btn btn-success upgradebtn">
                     <i class="glyphicon glyphicon-share-alt"></i> Khách hàng

@@ -11,6 +11,7 @@ var bally = {
         bally.TiemNangFn();
         bally.ChamSocFn();
         bally.LichHenFn();
+        bally.TuVanDichVuFn();
     }
     , PageFn: function () {
         var logout = $('.logoutbtn');
@@ -47,6 +48,19 @@ var bally = {
                 }
             });
         });
+
+        var tuNgayPicker = pnl.find('#TuNgayPicker');
+        if ($(tuNgayPicker).length > 0) {
+            tuNgayPicker.datetimepicker({
+                language: 'vi-Vn'
+            });    
+        }
+        var denNgayPicker = pnl.find('#DenNgayPicker');
+        if ($(denNgayPicker).length > 0) {
+            denNgayPicker.datetimepicker({
+                language: 'vi-Vn'
+            });
+        }
     }
     , KhachHangFn: function () {
 
@@ -341,4 +355,114 @@ var bally = {
             });
         });
     }
+     , TuVanDichVuFn: function () {
+         var pnl = $('.TuVanDichVu-Pnl-Add');
+         if ($(pnl).length < 1) return;
+
+         var savebtn = pnl.find('.savebtn');
+         var xoaBtn = pnl.find('.xoaBtn');
+
+
+         var ngayLapPicker = pnl.find('#NgayLapPicker');
+         ngayLapPicker.datetimepicker({
+             language: 'vi-Vn'
+         });
+
+         var khId = pnl.find('.KH_ID');
+         var khTen = pnl.find('.KH_Ten');
+         var btnHintKh = pnl.find('.btnHintKH');
+
+         adm.regType(typeof (DanhSachKhachHangFn), 'appStore.pmSpa.khachHangMgr.DanhSachKhachHang.Class1, appStore.pmSpa.khachHangMgr', function () {
+             DanhSachKhachHangFn.autoCompleteSearch(khTen, function (event, ui) {
+                 khId.val(ui.item.id);
+             });
+             khTen.unbind('click').click(function () {
+                 khTen.autocomplete('search', '');
+             });
+             btnHintKh.unbind('click').click(function () {
+                 khTen.autocomplete('search', '');
+             });
+         });
+
+         var dvId = pnl.find('.DV_ID');
+         var dvTen = pnl.find('.DV_Ten');
+         var btnHintDv = pnl.find('.btnHintDv');
+         var gia = pnl.find('.Gia');
+         adm.regType(typeof (danhMucDichVuMgr), 'appStore.pmSpa.danhMucDichVuMgr.Class1, appStore.pmSpa.danhMucDichVuMgr', function () {
+             danhMucDichVuMgr.autoCompleteByQ(dvTen, function (event, ui) {
+                 dvId.val(ui.item.id);
+                 var giaValue = gia.val();
+                 if (giaValue == '0') {
+                     gia.val(ui.item.gia);
+                 }
+             }, function (ul, item) {
+                 return $("<li></li>")
+                                .data("item.autocomplete", item)
+                                .append("<a><b>" + item.ma + '</b> ' + item.label + ' [' + item.gia + ']<br/>' + item.SoLan + ' lần, ' + item.ThoiGian + ' phút/ lần</a>')
+                                .appendTo(ul);
+             });
+             dvTen.unbind('click').click(function () {
+                 dvTen.autocomplete('search', '');
+             });
+             btnHintDv.unbind('click').click(function () {
+                 dvTen.autocomplete('search', '');
+             });
+         });
+
+         var nhanVienTen = pnl.find('.NhanVien_Ten');
+         var nhanVien = pnl.find('.NhanVien');
+         var btnHintNv = pnl.find('.btnHintNv');
+
+         adm.regType(typeof (thanhvien), 'docsoft.plugin.hethong.thanhvien.Class1, docsoft.plugin.hethong.thanhvien', function () {
+             thanhvien.setAutocomplete(nhanVienTen, function (event, ui) {
+                 nhanVienTen.val(ui.item.label);
+                 nhanVien.val(ui.item.value);
+             });
+             nhanVienTen.unbind('click').click(function () {
+                 nhanVienTen.autocomplete('search', '');
+             });
+             btnHintNv.unbind('click').click(function () {
+                 nhanVienTen.autocomplete('search', '');
+             });
+         });
+
+         xoaBtn.click(function () {
+             var data = pnl.find(':input').serializeArray();
+             data.push({ name: 'act', value: 'TuVanDichVu-Xoa' });
+             $.ajax({
+                 url: bally.url
+                , data: data
+                , success: function (ret) {
+                    if (ret == '0') {
+                        alert('Chỉ người tạo mới có quyền xóa! Vui lòng thử lại');
+                    } else {
+                        document.location.href = domain + '/lib/pages/TuVanDichVu/Default.aspx';
+                    }
+                }
+             });
+         });
+
+         savebtn.click(function () {
+             var item = $(this);
+             var returnUrl = item.attr('data-ret');
+             var data = pnl.find(':input').serializeArray();
+             data.push({ name: 'act', value: 'TuVanDichVu-Add' });
+             $.ajax({
+                 url: bally.url
+                , data: data
+                , success: function (ret) {
+
+                    if (returnUrl != '') {
+                        if (returnUrl.indexOf('?') < 0) {
+                            returnUrl = returnUrl + '?';
+                        }
+                        returnUrl = domain + returnUrl;
+                    } else {
+                        returnUrl = domain + '/lib/pages/TuVanDichVu/Add.aspx?ID=' + ret;
+                    }
+                    document.location.href = returnUrl;
+                }
+             });
+         });
+     }
 };

@@ -1,7 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Upcoming.ascx.cs" Inherits="lib_ui_Bally_LichHen_Upcoming" %>
 <%@ Register src="templates/Item.ascx" tagname="Item" tagprefix="uc1" %>
 <div class="panel panel-default">
-    <div class="panel-heading">Lịch hẹn</div>
+    <div class="panel-heading">
+        <div class="panel-title">
+            <a href="/lib/pages/LichHen/Default.aspx">Lịch hẹn</a>
+        </div>
+    </div>
     <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
             <thead>

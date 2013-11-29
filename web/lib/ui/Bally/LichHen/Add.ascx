@@ -12,7 +12,7 @@
         <%if (!string.IsNullOrEmpty(Id))
             {%>
             <a href="javascript:;" data-ret="<%=Ret %>" class="btn btn-primary savebtn">Lưu</a>
-            <a href="/lib/pages/DichVu/Add.aspx?KH_ID<%=Item.KH_ID %>" class="btn btn-success taoDichVubtn">
+            <a href="/lib/pages/TuVanDichVu/Add.aspx?KH_ID=<%=Item.KH_ID %>" class="btn btn-success taoDichVubtn">
                 <i class="glyphicon glyphicon-share-alt"></i> D/vụ
             </a>
             <%if(Item.NguoiTao == Security.Username){ %>
@@ -146,7 +146,7 @@
         <%if (!string.IsNullOrEmpty(Id))
             {%>
             <a href="javascript:;" data-ret="<%=Ret %>" class="btn btn-primary savebtn">Lưu</a>
-            <a href="/lib/pages/DichVu/Add.aspx?KH_ID<%=Item.KH_ID %>" class="btn btn-success taoDichVubtn">
+            <a href="/lib/pages/TuVanDichVu/Add.aspx?KH_ID=<%=Item.KH_ID %>" class="btn btn-success taoDichVubtn">
                 <i class="glyphicon glyphicon-share-alt"></i> D/vụ
             </a>
             <%if(Item.NguoiTao == Security.Username){ %>

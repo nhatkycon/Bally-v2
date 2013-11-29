@@ -21,7 +21,7 @@
                         S/Nhật
                     </th>
                     <th class="hidden-xs">
-                        Đ/chỉ
+                        Tuổi
                     </th>
                     <th class="hidden-xs">
                         Nguồn

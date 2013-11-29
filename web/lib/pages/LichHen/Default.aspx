@@ -39,7 +39,7 @@
         </div>               
     </div>
     <uc1:DanhSach ID="DanhSach1" runat="server" />
-    <ul class="PagingList">
+    <ul class="pagination">
         <%=paging %>
     </ul>
 </asp:Content>

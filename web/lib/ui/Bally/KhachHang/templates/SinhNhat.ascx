@@ -11,10 +11,10 @@
         </a>
     </td>
     <td class="">
-        <%=Item.NgaySinh.ToString("dd/MM") %> (<%=Math.Floor((DateTime.Now - Item.NgaySinh).TotalDays/365) %>)
+        <%=Item.NgaySinh.ToString("dd/MM") %>
     </td>
     <td class="hidden-xs">
-        <%=Item.DiaChi %>
+        <%=Item.Tuoi %>
     </td>
     <td class="hidden-xs">
         <%=Item.NguonGoc_Ten %>

@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/lib/master/Bally.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="lib_pages_Log_Default" %>
 
 <%@ Register src="../../ui/Bally/Log/DanhSach.ascx" tagname="DanhSach" tagprefix="uc1" %>
-<%@ Register src="../../ui/Bally/HeThong/DanhSachUser.ascx" tagname="DanhSachUser" tagprefix="uc3" %>
+<%@ Register src="~/lib/ui/Bally/HeThong/DanhSachUser.ascx" tagname="DanhSachUser" tagprefix="uc3" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div class="ModuleHeader">
+<div class="ModuleHeader">
     <div class="panel panel-default">
         <div class="panel-body" role="form">
             <div class="form-inline">
@@ -50,7 +50,7 @@
     </div>
 </div>    
     <uc1:DanhSach ID="DanhSach1" runat="server" />
-    <ul class="PagingList">
+    <ul class="pagination">
         <%=paging %>
     </ul>
 </asp:Content>

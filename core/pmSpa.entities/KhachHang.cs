@@ -519,7 +519,11 @@ namespace pmSpa.entities
         }
         public static Pager<KhachHang> pagerAll(SqlConnection con, string url, bool rewrite, string sort, string q, int size, string KhuVuc_ID, string NguonGoc_Id, string LinhVuc_Id, string TiemNang)
         {
-            var obj = new SqlParameter[6];
+            return pagerAll(con, url, rewrite, sort, q, size, KhuVuc_ID, NguonGoc_Id, LinhVuc_Id, TiemNang, null, null);
+        }
+        public static Pager<KhachHang> pagerAll(SqlConnection con, string url, bool rewrite, string sort, string q, int size, string KhuVuc_ID, string NguonGoc_Id, string LinhVuc_Id, string TiemNang, string TuNgay, string DenNgay)
+        {
+            var obj = new SqlParameter[8];
             obj[0] = new SqlParameter("Sort", sort);
             if (!string.IsNullOrEmpty(q))
             {
@@ -560,6 +564,22 @@ namespace pmSpa.entities
             else
             {
                 obj[5] = new SqlParameter("TiemNang", DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(TuNgay))
+            {
+                obj[6] = new SqlParameter("TuNgay", TuNgay);
+            }
+            else
+            {
+                obj[6] = new SqlParameter("TuNgay", DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(DenNgay))
+            {
+                obj[7] = new SqlParameter("DenNgay", DenNgay);
+            }
+            else
+            {
+                obj[7] = new SqlParameter("DenNgay", DBNull.Value);
             }
             var pg = new Pager<KhachHang>(con,"sp_tblSpaMgr_KhachHang_Pager_pagerAll_linhnx", "page", size, 10, rewrite, url, obj);
             return pg;

@@ -14,16 +14,7 @@
             </a>            
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <%--<li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thêm<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/lib/pages/TiemNang/Add.aspx">Tiềm năng</a></li>
-                        <li><a href="/lib/pages/KhachHang/Add.aspx">Khách hàng</a></li>
-                        <li><a href="/lib/pages/ChamSoc/Add.aspx">Chăm sóc</a></li>
-                        <li><a href="/lib/pages/LichHen/Add.aspx">Lịch hẹn</a></li>
-                    </ul>
-                </li>--%>
+            <ul class="nav navbar-nav">               
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marketing<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -43,14 +34,14 @@
                         <li><a href="/lib/pages/DichVu/Default.aspx">Dịch vụ</a></li>
                         <li><a href="/lib/pages/LamDichVu/Default.aspx">Làm dịch vụ</a></li>
                     </ul>
-                </li>
-            </ul>
-            <%--<div class="navbar-form navbar-left">
+                </li>                
+            </ul>            
+            <form action="/lib/pages/TimKiem.aspx" class="navbar-form navbar-left">
                 <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                    <input name="q" type="text" value="<%=Request["q"] %>" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-default">Tìm</button>
-            </div>--%>
+                <button type="submit" class="btn btn-default globalSearchBtn"><i class="glyphicon glyphicon-search"></i></button>
+            </form>
             <ul class="nav navbar-nav navbar-right">
               <li>
                   <%if(Security.IsAuthenticated()){ %>

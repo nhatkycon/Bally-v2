@@ -41,7 +41,7 @@
             <div class="imgfinder-box">
                 <div class="imgfinder-cover">
                     <div class="imgfinder-overlay">
-                        <span title="Chọn ảnh" class="btn btn-primary imgfinder-changeBtn">Chọn ảnh</span>
+                        <span title="Chọn ảnh" class="btn btn-primary imgfinder-changeBtn">Chọn</span><br/>
                         <span title="xóa ảnh" class="btn btn-default imgfinder-removeBtn">
                             <i class="glyphicon glyphicon-remove"></i>
                         </span>
@@ -67,6 +67,18 @@
                     </i>
                 </span>
             </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="NguonGocDdl" class="col-sm-2 control-label">Phân loại</label>
+        <div class="col-sm-10">
+            <select id="DanhGia" name="DanhGia" class="form-control DanhGia">
+                <option value="4">Vàng</option>
+                <option value="3">Bạc</option>
+                <option value="2">Đồng</option>
+                <option value="1">Triển vọng</option>
+                <option value="0">Kém</option>
+            </select>
         </div>
     </div>
     <div class="form-group">
@@ -129,6 +141,7 @@
         $('.NguonGoc_ID').val('<%=Item.NguonGoc_ID %>');
         $('.KhuVuc_ID').val('<%=Item.KhuVuc_ID %>');
         $('.LinhVuc_ID').val('<%=Item.LinhVuc_ID %>');
+        $('.DanhGia').val('<%=Item.DanhGia %>');
     })
 </script>
 <%} %>

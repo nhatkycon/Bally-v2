@@ -31,6 +31,7 @@ namespace pmSpa.entities
         public Guid KHO_ID { get; set; }
         public Double CK { get; set; }
         public String NhanVien { get; set; }
+        public String Ma { get; set; }
         #endregion
         #region Contructor
         public TuVanDichVu()
@@ -40,6 +41,7 @@ namespace pmSpa.entities
         public String BaoHanh_Ten { get; set; }
         public String NhanVien_Ten { get; set; }
         public String KHO_Ten { get; set; }
+        public string KH_Ten { get; set; }
         public DichVu _DichVu { get; set; }
         public TuVan _TuVan { get; set; }
         public KhachHang _KhachHang { get; set; }
@@ -72,7 +74,7 @@ namespace pmSpa.entities
         public static TuVanDichVu Insert(TuVanDichVu item)
         {
             var Item = new TuVanDichVu();
-            var obj = new SqlParameter[16];
+            var obj = new SqlParameter[17];
             obj[0] = new SqlParameter("TVDV_ID", item.ID);
             obj[1] = new SqlParameter("TVDV_KH_ID", item.KH_ID);
             obj[2] = new SqlParameter("TVDV_TV_ID", item.TV_ID);
@@ -103,7 +105,7 @@ namespace pmSpa.entities
             obj[13] = new SqlParameter("TVDV_KHO_ID", item.KHO_ID);
             obj[14] = new SqlParameter("TVDV_CK", item.CK);
             obj[15] = new SqlParameter("TVDV_NhanVien", item.NhanVien);
-
+            obj[16] = new SqlParameter("TVDV_Ma", item.Ma);
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblSpaMgr_TuVanDichVu_Insert_InsertNormal_linhnx", obj))
             {
                 while (rd.Read())
@@ -117,7 +119,7 @@ namespace pmSpa.entities
         public static TuVanDichVu Update(TuVanDichVu item)
         {
             var Item = new TuVanDichVu();
-            var obj = new SqlParameter[16];
+            var obj = new SqlParameter[17];
             obj[0] = new SqlParameter("TVDV_ID", item.ID);
             obj[1] = new SqlParameter("TVDV_KH_ID", item.KH_ID);
             obj[2] = new SqlParameter("TVDV_TV_ID", item.TV_ID);
@@ -148,7 +150,7 @@ namespace pmSpa.entities
             obj[13] = new SqlParameter("TVDV_KHO_ID", item.KHO_ID);
             obj[14] = new SqlParameter("TVDV_CK", item.CK);
             obj[15] = new SqlParameter("TVDV_NhanVien", item.NhanVien);
-
+            obj[16] = new SqlParameter("TVDV_Ma", item.Ma);
             using (IDataReader rd = SqlHelper.ExecuteReader(DAL.con(), CommandType.StoredProcedure, "sp_tblSpaMgr_TuVanDichVu_Update_UpdateNormal_linhnx", obj))
             {
                 while (rd.Read())
@@ -188,7 +190,13 @@ namespace pmSpa.entities
         }
         public static Pager<TuVanDichVu> pagerNormal(string url, bool rewrite, string sort, string q, int size)
         {
-            var obj = new SqlParameter[2];
+            return pagerNormal(DAL.con(), url, rewrite, sort, q, size, null, null, null, null, null);
+        }
+        public static Pager<TuVanDichVu> pagerNormal(SqlConnection con, string url
+            , bool rewrite, string sort, string q, int size
+            , string DV_ID, string KH_ID, string NhanVien, string TuNgay, string DenNgay)
+        {
+            var obj = new SqlParameter[8];
             obj[0] = new SqlParameter("Sort", sort);
             if (!string.IsNullOrEmpty(q))
             {
@@ -199,6 +207,46 @@ namespace pmSpa.entities
                 obj[1] = new SqlParameter("q", DBNull.Value);
             }
 
+            if (!string.IsNullOrEmpty(DV_ID))
+            {
+                obj[2] = new SqlParameter("DV_ID", DV_ID);
+            }
+            else
+            {
+                obj[2] = new SqlParameter("DV_ID", DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(KH_ID))
+            {
+                obj[3] = new SqlParameter("KH_ID", KH_ID);
+            }
+            else
+            {
+                obj[3] = new SqlParameter("KH_ID", DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(NhanVien))
+            {
+                obj[4] = new SqlParameter("NhanVien", NhanVien);
+            }
+            else
+            {
+                obj[4] = new SqlParameter("NhanVien", DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(TuNgay))
+            {
+                obj[5] = new SqlParameter("TuNgay", TuNgay);
+            }
+            else
+            {
+                obj[5] = new SqlParameter("TuNgay", DBNull.Value);
+            }
+            if (!string.IsNullOrEmpty(DenNgay))
+            {
+                obj[6] = new SqlParameter("DenNgay", DenNgay);
+            }
+            else
+            {
+                obj[6] = new SqlParameter("DenNgay", DBNull.Value);
+            }
             var pg = new Pager<TuVanDichVu>("sp_tblSpaMgr_TuVanDichVu_Pager_Normal_linhnx", "page", size, 10, rewrite, url, obj);
             return pg;
         }
@@ -246,6 +294,10 @@ namespace pmSpa.entities
             if (rd.FieldExists("TVDV_NguoiTao"))
             {
                 Item.NguoiTao = (String)(rd["TVDV_NguoiTao"]);
+            }
+            if (rd.FieldExists("TVDV_Ma"))
+            {
+                Item.Ma = (String)(rd["TVDV_Ma"]);
             }
             if (rd.FieldExists("TVDV_Gia"))
             {

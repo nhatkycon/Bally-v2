@@ -22,6 +22,7 @@ public partial class lib_ajax_Default : BasedPage
         var IdNull = string.IsNullOrEmpty(Id);
         var Ten = Request["Ten"];
         var Ma = Request["Ma"];
+        var DanhGia = Request["DanhGia"];
         var Mobile = Request["Mobile"];
         var Ym = Request["Ym"];
         var FacebookUid = Request["FacebookUid"];
@@ -45,6 +46,15 @@ public partial class lib_ajax_Default : BasedPage
         var BoQua = Request["BoQua"];
         var ThanhCong = Request["ThanhCong"];
         var refUrl = Request["refUrl"];
+        var DV_ID = Request["DV_ID"];
+        var Gia = Request["Gia"];
+        var CK = Request["CK"];
+        var ThanhToan = Request["ThanhToan"];
+        var ConNo = Request["ConNo"];
+        var BaoHanh_ID = Request["BaoHanh_ID"];
+        var NgayLap = Request["NgayLap"];
+        var SoLan = Request["SoLan"];
+        var GhiChu = Request["GhiChu"];
         if (!string.IsNullOrEmpty(refUrl))
             refUrl = Server.UrlDecode(refUrl);
         NgungTheoDoi = !string.IsNullOrEmpty(NgungTheoDoi) ? "true" : "false";
@@ -85,6 +95,7 @@ public partial class lib_ajax_Default : BasedPage
                     {
                         item.LinhVuc_ID = new Guid(LinhVuc_ID);
                     }
+                    item.DanhGia = Convert.ToInt16(DanhGia);
                     if (IdNull)
                     {
                         item.NgayTao = DateTime.Now;
@@ -502,6 +513,156 @@ public partial class lib_ajax_Default : BasedPage
                             PRowId = item.ID
                             ,
                             PTen = item.Ten
+                            ,
+                            RequestIp = Request.UserHostAddress
+                            ,
+                            RawUrl = refUrl
+                            ,
+                            LLOG_ID = 3
+                            ,
+                            Ten = "Xóa"
+                        });
+                        #endregion
+                        rendertext("1");
+                    }
+                    else
+                    {
+                        rendertext("0");
+                    }
+                }
+                break;
+                #endregion
+            case "TuVanDichVu-Add":
+                #region Thêm tư vấn dịch vụ
+
+                if (Security.IsAuthenticated())
+                {
+                    TuVanDichVu item;
+                    if (IdNull)
+                    {
+                        item = new TuVanDichVu { ID = Guid.NewGuid(), NgayTao = DateTime.Now, NguoiTao = Security.Username };
+                    }
+                    else
+                    {
+                        item = TuVanDichVuDal.SelectById(new Guid(Id));
+
+                    }
+                    item.Ma = Ma;
+                    item.Gia = Convert.ToDouble(Gia);
+                    item.CK = Convert.ToDouble(CK);
+                    item.ThanhToan = Convert.ToDouble(ThanhToan);
+                    item.ConNo = Convert.ToDouble(ConNo);
+                    item.SoLan = Convert.ToInt32(SoLan);
+                    if (!string.IsNullOrEmpty(NgayLap))
+                    {
+                        item.NgayLap = Convert.ToDateTime(NgayLap, new CultureInfo("vi-vn"));
+                    }
+                    if (!string.IsNullOrEmpty(KH_ID))
+                    {
+                        item.KH_ID = new Guid(KH_ID);
+                    }
+                    if (!string.IsNullOrEmpty(BaoHanh_ID))
+                    {
+                        item.BaoHanh_ID = new Guid(BaoHanh_ID);
+                    }
+                    if (!string.IsNullOrEmpty(DV_ID))
+                    {
+                        item.DV_ID = new Guid(DV_ID);
+                    }
+                    item.GhiChu = GhiChu;
+                    item.NhanVien = NhanVien;
+                    if (IdNull)
+                    {
+                        item = TuVanDichVuDal.Insert(item);
+                        #region log
+                        LogDal.log(item, new Log()
+                        {
+                            Checked = false
+                            ,
+                            Info =
+                                string.Format("{1} thêm mới tư vấn dịch vụ: {0}", item.Ma,
+                                              Security.Username)
+                            ,
+                            NgayTao = DateTime.Now
+                            ,
+                            Username = Security.Username
+                            ,
+                            PRowId = item.ID
+                            ,
+                            PTen = item.Ma
+                            ,
+                            RequestIp = Request.UserHostAddress
+                            ,
+                            RawUrl = refUrl
+                            ,
+                            LLOG_ID = 1
+                            ,
+                            Ten = "Thêm"
+                        });
+                        #endregion
+                    }
+                    else
+                    {
+                        item = TuVanDichVuDal.Update(item);
+                        #region log
+                        LogDal.log(item, new Log()
+                        {
+                            Checked = false
+                            ,
+                            Info =
+                                string.Format("{1} sửa tư vấn dịch vụ: {0}", item.Ma,
+                                              Security.Username)
+                            ,
+                            NgayTao = DateTime.Now
+                            ,
+                            Username = Security.Username
+                            ,
+                            PRowId = item.ID
+                            ,
+                            PTen = item.Ma
+                            ,
+                            RequestIp = Request.UserHostAddress
+                            ,
+                            RawUrl = refUrl
+                            ,
+                            LLOG_ID = 2
+                            ,
+                            Ten = "Sửa"
+                        });
+                        #endregion
+                    }
+                    TimKiemDal.Add(item, item.ID);
+                    rendertext(item.ID.ToString());
+                }
+                break;
+
+                #endregion
+            case "TuVanDichVu-Xoa":
+                #region Xóa tư vấn dịch vụ
+
+                if (Security.IsAuthenticated())
+                {
+                    var item = TuVanDichVuDal.SelectById(new Guid(Id));
+                    if (item.NguoiTao == Security.Username)
+                    {
+                        TuVanDichVuDal.DeleteById(new Guid(Id));
+                        TimKiemDal.DeleteByPRowId(DAL.con(), item.ID);
+                        #region log
+                        LogDal.log(item, new Log()
+                        {
+                            Checked = false
+                            ,
+                            Info =
+                                string.Format("{1} xóa tư vấn dịch vụ: {0}", item.Ma,
+                                              Security.Username)
+                            ,
+                            NgayTao = DateTime.Now
+                            ,
+                            Username = Security.Username
+                            ,
+                            PRowId = item.ID
+                            ,
+                            PTen = item.Ma
                             ,
                             RequestIp = Request.UserHostAddress
                             ,

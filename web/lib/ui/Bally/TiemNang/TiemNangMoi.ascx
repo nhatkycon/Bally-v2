@@ -4,7 +4,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-title">
-        Tiềm năng mới            
+        <a href="/lib/pages/TiemNang/Default.aspx">Tiềm năng mới</a>            
         </div>
     </div>
     <div class="panel-body">

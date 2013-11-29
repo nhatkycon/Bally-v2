@@ -120,8 +120,6 @@ namespace linh.controls
             }
             #endregion
             var sb = new StringBuilder();
-            #region new
-            #endregion
             #region old
             if (Total > 0 && Total > PageSize)
             {
@@ -138,9 +136,9 @@ namespace linh.controls
                             //    , UseRewriter ? Query + "/" : "&" + Query + "="
                             //    , i
                             //    , string.IsNullOrEmpty(CUrl) ? "?" : CUrl);
-                            sb.AppendFormat("<a class=\"PagingItem {1}\" href=\"{2}\">{0}</a>"
+                            sb.AppendFormat("<li class=\"{1}\"><a class=\"PagingItem {1}\" href=\"{2}\">{0}</a></li>"
                                 , i
-                                , i == PageIndex ? "PagingItemActive" : ""
+                                , i == PageIndex ? "PagingItemActive active" : ""
                                 , string.Format(CUrl, i, Query));
                         }
                     }
@@ -151,9 +149,9 @@ namespace linh.controls
                     if (currentPageStage > 1 && currentPageStage < maxPage)
                     {
                         #region Firts, Prev
-                        sb.AppendFormat("<a class=\"PagingItem PagingItemFirts\" href=\"{0}\"><<</a>"
+                        sb.AppendFormat("<li><a class=\"PagingItem PagingItemFirts\" href=\"{0}\"><<</a></li>"
                             , string.Format(CUrl, "1", Query));
-                        sb.AppendFormat("<a class=\"PagingItem PagingItemPrev\" href=\"{0}\"><</a>"
+                        sb.AppendFormat("<li><a class=\"PagingItem PagingItemPrev\" href=\"{0}\"><</a></li>"
                             , string.Format(CUrl, ((currentPageStage - 1) * PagingSize), Query));
                         #endregion
                         #region Paging
@@ -161,17 +159,17 @@ namespace linh.controls
                         {
                             if (i < TotalPages)
                             {
-                                sb.AppendFormat("<a class=\"PagingItem {1}\" href=\"{2}\">{0}</a>"
+                                sb.AppendFormat("<li class=\"{1}\"><a class=\"PagingItem {1}\" href=\"{2}\">{0}</a></li>"
                                 , i
-                                , i == PageIndex ? "PagingItemActive" : ""
+                                , i == PageIndex ? "PagingItemActive active" : ""
                                 , string.Format(CUrl, i, Query));
                             }
                         }
                         #endregion
                         #region Next, Last
-                        sb.AppendFormat("<a class=\"PagingItem PagingItemFirts\" href=\"{0}\">></a>"
+                        sb.AppendFormat("<li><a class=\"PagingItem PagingItemFirts\" href=\"{0}\">></a></li>"
                             , string.Format(CUrl, (currentPageStage * PagingSize) + 1, Query));
-                        sb.AppendFormat("<a class=\"PagingItem PagingItemFirts\" href=\"{0}\">>></a>"
+                        sb.AppendFormat("<li><a class=\"PagingItem PagingItemFirts\" href=\"{0}\">>></a></li>"
                             , string.Format(CUrl, TotalPages, Query));
                         #endregion
 
@@ -183,26 +181,26 @@ namespace linh.controls
                         {
                             if (i < TotalPages)
                             {
-                                sb.AppendFormat("<a class=\"PagingItem {1}\" href=\"{2}\">{0}</a>"
+                                sb.AppendFormat("<li class=\"{1}\"><a class=\"PagingItem {1}\" href=\"{2}\">{0}</a></li>"
                                 , i
-                                , i == PageIndex ? "PagingItemActive" : ""
+                                , i == PageIndex ? "PagingItemActive active" : ""
                                 , string.Format(CUrl, i, Query));
                             }
                         }
                         #endregion
                         #region Next, Last
-                        sb.AppendFormat("<a class=\"PagingItem PagingItemFirts\" href=\"{0}\">></a>"
+                        sb.AppendFormat("<li><a class=\"PagingItem PagingItemFirts\" href=\"{0}\">></a></li>"
                             , string.Format(CUrl, (currentPageStage * PagingSize) + 1, Query));
-                        sb.AppendFormat("<a class=\"PagingItem PagingItemFirts\" href=\"{0}\">>></a>"
+                        sb.AppendFormat("<li><a class=\"PagingItem PagingItemFirts\" href=\"{0}\">>></a></li>"
                             , string.Format(CUrl, TotalPages, Query));
                         #endregion
                     }
                     else
                     {
                         #region Firts, Prev
-                        sb.AppendFormat("<a class=\"PagingItem PagingItemFirts\" href=\"{0}\"><<</a>"
+                        sb.AppendFormat("<li><a class=\"PagingItem PagingItemFirts\" href=\"{0}\"><<</a></li>"
                             , string.Format(CUrl, "1", Query));
-                        sb.AppendFormat("<a class=\"PagingItem PagingItemPrev\" href=\"{0}\"><</a>"
+                        sb.AppendFormat("<li><a class=\"PagingItem PagingItemPrev\" href=\"{0}\"><</a></li>"
                             , string.Format(CUrl, ((currentPageStage - 1) * PagingSize), Query));
                         #endregion
                         #region Paging
@@ -210,9 +208,9 @@ namespace linh.controls
                         {
                             if (i < TotalPages)
                             {
-                                sb.AppendFormat("<a class=\"PagingItem {1}\" href=\"{2}\">{0}</a>"
+                                sb.AppendFormat("<li class=\"{1}\"><a class=\"PagingItem {1}\" href=\"{2}\">{0}</a></li>"
                                 , i
-                                , i == PageIndex ? "PagingItemActive" : ""
+                                , i == PageIndex ? "PagingItemActive active" : ""
                                 , string.Format(CUrl, i, Query));
                             }
                         }

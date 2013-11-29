@@ -14,6 +14,7 @@ public partial class lib_ui_Bally_KhachHang_Add : System.Web.UI.UserControl
     public string Ret { get; set; }
     public List<ChamSoc> ChamSocs { get; set; }
     public List<SuKien> SuKiens { get; set; }
+    public List<TuVanDichVu> DichVus { get; set; }
     protected void Page_Load(object sender, EventArgs e)
     {
         Id = Request["ID"];
@@ -26,5 +27,6 @@ public partial class lib_ui_Bally_KhachHang_Add : System.Web.UI.UserControl
         DanhSach1.List = ChamSocs;
         DanhSach2.List = SuKiens;
         Add1.TiemNang = TiemNang;
+        DanhSach3.List = DichVus;
     }
 }
