@@ -12,6 +12,7 @@ var bally = {
         bally.ChamSocFn();
         bally.LichHenFn();
         bally.TuVanDichVuFn();
+        bally.TuVanLamDichVuFn();
     }
     , PageFn: function () {
         var logout = $('.logoutbtn');
@@ -96,7 +97,7 @@ var bally = {
                 url: bally.url
                 , data: data
                 , success: function (ret) {
-
+                    $('#DoneModal').modal();
                     if (returnUrl != '') {
                         if (returnUrl.indexOf('?') < 0) {
                             returnUrl = returnUrl + '?';
@@ -181,6 +182,7 @@ var bally = {
                 url: bally.url
                 , data: data
                 , success: function (ret) {
+                    $('#DoneModal').modal();
                     document.location.href = domain + '/lib/pages/TiemNang/Add.aspx?ID=' + ret;
                 }
                 , error: function (xhr, ajaxOptions, thrownError) {
@@ -255,7 +257,7 @@ var bally = {
                 url: bally.url
                 , data: data
                 , success: function (ret) {
-
+                    $('#DoneModal').modal();
                     if (returnUrl != '') {
                         if (returnUrl.indexOf('?') < 0) {
                             returnUrl = returnUrl + '?';
@@ -341,7 +343,7 @@ var bally = {
                 url: bally.url
                 , data: data
                 , success: function (ret) {
-
+                    $('#DoneModal').modal();
                     if (returnUrl != '') {
                         if (returnUrl.indexOf('?') < 0) {
                             returnUrl = returnUrl + '?';
@@ -388,6 +390,19 @@ var bally = {
          var dvTen = pnl.find('.DV_Ten');
          var btnHintDv = pnl.find('.btnHintDv');
          var gia = pnl.find('.Gia');
+         var ck = pnl.find('.CK');
+         var thanhToan = pnl.find('.ThanhToan');
+         var conNo = pnl.find('.ConNo');
+
+         pnl.find('.Gia, .CK, .ThanhToan, .ConNo').keyup(function () {
+             var _ck = parseInt(ck.val());
+             var _gia = parseInt(gia.val());
+             var _thanhToan = parseInt(thanhToan.val());
+             var _conNo = _gia - _ck - _thanhToan;
+             conNo.val(_conNo);
+             
+         });
+
          adm.regType(typeof (danhMucDichVuMgr), 'appStore.pmSpa.danhMucDichVuMgr.Class1, appStore.pmSpa.danhMucDichVuMgr', function () {
              danhMucDichVuMgr.autoCompleteByQ(dvTen, function (event, ui) {
                  dvId.val(ui.item.id);
@@ -451,6 +466,7 @@ var bally = {
                  url: bally.url
                 , data: data
                 , success: function (ret) {
+                    $('#DoneModal').modal();
 
                     if (returnUrl != '') {
                         if (returnUrl.indexOf('?') < 0) {
@@ -459,6 +475,76 @@ var bally = {
                         returnUrl = domain + returnUrl;
                     } else {
                         returnUrl = domain + '/lib/pages/TuVanDichVu/Add.aspx?ID=' + ret;
+                    }
+                    document.location.href = returnUrl;
+                }
+             });
+         });
+     }
+     , TuVanLamDichVuFn: function () {
+         var pnl = $('.TuVanLamDichVu-Pnl-Add');
+         if ($(pnl).length < 1) return;
+         
+         var savebtn = pnl.find('.savebtn');
+         var xoaBtn = pnl.find('.xoaBtn');
+
+
+         var ngayLamPicker = pnl.find('#NgayLamPicker');
+         ngayLamPicker.datetimepicker({
+             language: 'vi-Vn'
+         });
+         
+         var nhanVienTen = pnl.find('.NhanVien_Ten');
+         var nhanVien = pnl.find('.NhanVien');
+         var btnHintNv = pnl.find('.btnHintNv');
+
+         adm.regType(typeof (thanhvien), 'docsoft.plugin.hethong.thanhvien.Class1, docsoft.plugin.hethong.thanhvien', function () {
+             thanhvien.setAutocomplete(nhanVienTen, function (event, ui) {
+                 nhanVienTen.val(ui.item.label);
+                 nhanVien.val(ui.item.value);
+             });
+             nhanVienTen.unbind('click').click(function () {
+                 nhanVienTen.autocomplete('search', '');
+             });
+             btnHintNv.unbind('click').click(function () {
+                 nhanVienTen.autocomplete('search', '');
+             });
+         });
+         
+         xoaBtn.click(function () {
+             var data = pnl.find(':input').serializeArray();
+             data.push({ name: 'act', value: 'TuVanLamDichVu-Xoa' });
+             $.ajax({
+                 url: bally.url
+                , data: data
+                , success: function (ret) {
+                    if (ret == '0') {
+                        alert('Chỉ người tạo mới có quyền xóa! Vui lòng thử lại');
+                    } else {
+                        document.location.href = domain + '/lib/pages/TuVanLamDichVu/Default.aspx';
+                    }
+                }
+             });
+         });
+
+         savebtn.click(function () {
+             var item = $(this);
+             var returnUrl = item.attr('data-ret');
+             var data = pnl.find(':input').serializeArray();
+             data.push({ name: 'act', value: 'TuVanLamDichVu-Add' });
+             $.ajax({
+                 url: bally.url
+                , data: data
+                , success: function (ret) {
+                    $('#DoneModal').modal();
+
+                    if (returnUrl != '') {
+                        if (returnUrl.indexOf('?') < 0) {
+                            returnUrl = returnUrl + '?';
+                        }
+                        returnUrl = domain + returnUrl;
+                    } else {
+                        returnUrl = domain + '/lib/pages/TuVanLamDichVu/Add.aspx?ID=' + ret;
                     }
                     document.location.href = returnUrl;
                 }

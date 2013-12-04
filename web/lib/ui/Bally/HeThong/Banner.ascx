@@ -28,13 +28,6 @@
                          <%  } %>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hoạt động<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/lib/pages/DichVu/Default.aspx">Dịch vụ</a></li>
-                        <li><a href="/lib/pages/LamDichVu/Default.aspx">Làm dịch vụ</a></li>
-                    </ul>
-                </li>                
             </ul>            
             <form action="/lib/pages/TimKiem.aspx" class="navbar-form navbar-left">
                 <div class="form-group">

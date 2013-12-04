@@ -76,19 +76,19 @@
             <div class="form-group">
                 <label for="CK" class="col-sm-2 control-label">Chiết khấu</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="CK" id="CK" value="<%=Item.CK %>" />
+                    <input type="text" class="form-control CK" name="CK" id="CK" value="<%=Item.CK %>" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="ConNo" class="col-sm-2 control-label">Thanh toán</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="ThanhToan" id="ThanhToan" value="<%=Item.ThanhToan %>" />
+                    <input type="text" class="form-control ThanhToan" name="ThanhToan" id="ThanhToan" value="<%=Item.ThanhToan %>" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="ConNo" class="col-sm-2 control-label">Còn nợ</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="ConNo" id="ConNo" value="<%=Item.ConNo %>" />
+                    <input type="text" class="form-control ConNo" name="ConNo" id="ConNo" value="<%=Item.ConNo %>" />
                 </div>
             </div>
             <div class="form-group">

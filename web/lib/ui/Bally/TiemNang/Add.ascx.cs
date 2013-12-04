@@ -13,6 +13,7 @@ public partial class lib_ui_Bally_TiemNang_Add : System.Web.UI.UserControl
     public List<ChamSoc> ChamSocs { get; set; }
     public List<SuKien> SuKiens { get; set; }
     public string Ret { get; set; }
+    public List<TuVanDichVu> DichVus { get; set; }
     protected void Page_Load(object sender, EventArgs e)
     {
         Id = Request["ID"];
@@ -25,5 +26,6 @@ public partial class lib_ui_Bally_TiemNang_Add : System.Web.UI.UserControl
         Add1.TiemNang = TiemNang;
         DanhSach1.List = ChamSocs;
         DanhSach2.List = SuKiens;
+        DanhSach3.List = DichVus;
     }
 }

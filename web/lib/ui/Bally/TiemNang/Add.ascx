@@ -3,6 +3,7 @@
 <%@ Register src="~/lib/ui/Bally/ChamSoc/DanhSach.ascx" tagname="DanhSach" tagprefix="uc2" %>
 <%@ Register src="~/lib/ui/Bally/LichHen/DanhSach.ascx" tagname="DanhSach" tagprefix="uc3" %>
 <%@ Register src="~/lib/ui/Bally/KhachHang/templates/Add.ascx" tagname="Add" tagprefix="uc1" %>
+<%@ Register src="../TuVanDichVu/DanhSach.ascx" tagname="DanhSach" tagprefix="uc4" %>
 <div class="panel panel-default TiemNang-Pnl-Add">
     <div class="panel-heading">
         <a href="/lib/pages/TiemNang/Default.aspx" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i></a>
@@ -67,5 +68,16 @@
     </div>    
 </div>
 <uc3:DanhSach ID="DanhSach2" runat="server" />
+<div class="panel panel-default">    
+    <div class="panel-body">
+        <h3>Dịch vụ</h3>        
+        <hr/>
+        <a href="/lib/pages/TuVanDichVu/Add.aspx?ret=<%=Server.UrlEncode(Request.Url.PathAndQuery) %>&KH_ID=<%=Item.ID %>" class="btn btn-primary">Thêm</a>
+        <a href="" class="btn btn-success">
+            <i class="glyphicon glyphicon-refresh"></i>
+        </a>        
+    </div>    
+</div>
+<uc4:DanhSach ID="DanhSach3" runat="server" />
 <%} %>
 <script src="/lib/js/ckfinder/ckfinder.js" type="text/javascript"></script>     

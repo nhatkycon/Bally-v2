@@ -56,8 +56,8 @@
         <div class="col-sm-10">
             <div id="NgaySinhPicker" class="input-append date input-group">
                 <input 
-                    value="<%=Item.NgaySinh == DateTime.MinValue ?  DateTime.Now.ToString("hh:mm dd/MM/yyyy") : "" %>"
-                    data-format="hh:mm dd/MM/yyyy" 
+                    value="<%=Item.NgaySinh == DateTime.MinValue ?  "" : Item.NgaySinh.ToString("dd/MM/yyyy") %>"
+                    data-format="dd/MM/yyyy" 
                     class="form-control NgaySinh" 
                     id="NgaySinh" 
                     name="NgaySinh" 
